@@ -173,7 +173,7 @@ import { getAnalytics } from "firebase/analytics";
         }
  
         // Salva o monstro no firebase
-        function saveMonstro(ND,nome,tipo,subtipo,tamanho,armadura,fortitude,reflexo, vontade, vida, deslocamento, valor_acerto,dano,forca,destreza,constituicao,inteligencia,sabedoria,carisma,tesouro); {
+        function saveMonstro(ND,nome,tipo,subtipo,tamanho,armadura,fortitude,reflexo, vontade, vida, deslocamento, valor_acerto,dano,forca,destreza,constituicao,inteligencia,sabedoria,carisma,tesouro){
             let newMonstroRef = monstrosRef.push();
             newMonstroRef.set({
                 ND: ND,
