@@ -18,8 +18,8 @@
     </style>
 </head>
 <body>
-    <h1>Bem-vindo ao Meu Site</h1>
-    <p>Conteúdo do site vai aqui.</p>
+    <h1>Criador manual de monstros.</h1>
+    <p>Adicione as caracteristicas do seu monstro aqui:.</p>
     <form action="/action_page.php">
       <label for="desafio">Nivel de Desafio:</label><br>
       <input type="number" id="ND" name="nd" ><br>
@@ -76,9 +76,9 @@
   <label for="pv">pontos de vida:</label><br>
   <input type="number" id="pv" name="pontos de vida" ><br><br>
   <label for="deslocamento">deslocamento:</label><br>
-  <input type="number" id="des" name="deslocamento" ><br>
+  <input type="number" id="deslocamento" name="deslocamento" ><br>
    <br>
-  <label for="pv">valor acerto:</label><br>
+  <label for="pv">valor de acerto:</label><br>
   <input type="number" id="valatq" name="valor ataque" ><br>
   <label for="des">dano medio:</label><br>
   <input type="number" id="dano" name="dano" ><br>
@@ -104,8 +104,98 @@
    <label for="treasure">Tesouro:</label>
   <br>
   <input type="text" id="treasure" name="treasure"><br>
-  
-  <input type="submit" value="Submit">
+  <button type="submit" class="btn btn-primary"
+                style="margin-left: 15px; margin-top: 10px">
+                Submit
+            </button>
+        
 </form>
+
+
+    <script src=
+"https://www.gstatic.com/firebasejs/3.7.4/firebase.js">
+    </script>
+     
+    <script>
+        let firebaseConfig = {
+             apiKey: "AIzaSyD4pj-vv2AUd9BUjMpGppHrgK7aFkfQ96Q",
+    authDomain: "tormenta-projeto.firebaseapp.com",
+    projectId: "tormenta-projeto",
+    storageBucket: "tormenta-projeto.firebasestorage.app",
+    messagingSenderId: "840338790531",
+    appId: "1:840338790531:web:713b137e4fc6a8640623b6",
+    measurementId: "G-H43EHD51KJ"
+        };
+ 
+        firebase.initializeApp(firebaseConfig);
+ 
+        let messagesRef = firebase.database()
+            .ref('Collected Data');
+         
+        document.getElementById('contactForm')
+            .addEventListener('submit', submitForm);
+ 
+        function submitForm(e) {
+            e.preventDefault();
+ 
+            // Get values
+            let ND = getInputVal('ND');
+            let nome = getInputVal('name');
+            let tipo = getInputVal('type');
+           
+            let subtipo = getInputVal('subtype');
+            let tamanho = getInputVal('size');
+            let armadura = getInputVal('CA');
+            let fortitude = getInputVal('fort');
+            let reflexo = getInputVal('ref');
+            let vontade = getInputVal('von');
+            let vida = getInputVal('pv');
+            let deslocamento = getInputVal('deslocamento');
+            let valor_acerto = getInputVal('valatq');
+            let dano = getInputVal('dano');
+            let forca = getInputVal('for');
+            let destreza = getInputVal('des');
+            let constituicao = getInputVal('con');
+            let inteligencia = getInputVal('int');
+            let sabedoria = getInputVal('sab');
+            let carisma = getInputVal('car');
+            let tesouro = getInputVal('treasure');
+ 
+            saveMonstro(ND,nome,tipo,subtipo,tamanho,armadura,fortitude,reflexo, vontade, vida, deslocamento, valor_acerto,dano,forca,destreza,constituicao,inteligencia,sabedoria,carisma,tesouro);
+            document.getElementById('contactForm').reset();
+        }
+ 
+        // Function to get form values
+        function getInputVal(id) {
+            return document.getElementById(id).value;
+        }
+ 
+        // Salva o monstro no firebase
+        function saveMonstro(ND,nome,tipo,subtipo,tamanho,armadura,fortitude,reflexo, vontade, vida, deslocamento, valor_acerto,dano,forca,destreza,constituicao,inteligencia,sabedoria,carisma,tesouro); {
+            let newMonstroRef = monstrosRef.push();
+            newMonstroRef.set({
+                ND: ND,
+                nome: nome,
+                tipo: tipo,
+                subtipo: subtipo,
+                tamanho: tamanho,
+                armadura: armadura,
+                fortitude: fortitude,
+                reflexo: reflexo,
+                vontade: vontade,
+                vida: vida,
+                deslocamento: deslocamento,
+                valor_acerto: valor_acerto,
+                dano: dano,
+                forca: forca,
+                destreza: destreza,
+                constituicao: constituicao,
+                inteligencia: inteligencia,
+                sabedoria: sabedoria,
+                carisma: carisma,
+                tesouro: tesouro,
+            });
+        }
+    </script>
 </body>
 </html>
