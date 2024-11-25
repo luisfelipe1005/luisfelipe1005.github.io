@@ -99,7 +99,7 @@
   <input type="number" id="sab" name="sab" ><br>
   
   <label for="con">CAR</label>
-  <input type="number" id="con" name="con" ><br>
+  <input type="number" id="car" name="car" ><br>
   <br>
    <label for="treasure">Tesouro:</label>
   <br>
@@ -131,8 +131,7 @@ import { getAnalytics } from "firebase/analytics";
  
         firebase.initializeApp(firebaseConfig);
  
-        let monstrosRef = firebase.database()
-            .ref('Collected Data');
+        let monstrosRef = firebase.database().ref('Collected Data');
          
         document.getElementById('monstroForm')
             .addEventListener('submit', submitForm);
