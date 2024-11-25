@@ -20,7 +20,7 @@
 <body>
     <h1>Criador manual de monstros.</h1>
     <p>Adicione as caracteristicas do seu monstro aqui:.</p>
-    <form action="javascript:void(0)">
+    <form id="monstroForm" action="javascript:void(0)">
       <label for="desafio">Nivel de Desafio:</label><br>
       <input type="number" id="ND" name="nd" ><br>
       <label for="name">Nome do monstro:</label>
@@ -134,7 +134,7 @@ import { getAnalytics } from "firebase/analytics";
         let monstrosRef = firebase.database()
             .ref('Collected Data');
          
-        document.getElementById('contactForm')
+        document.getElementById('monstroForm')
             .addEventListener('submit', submitForm);
  
         function submitForm(e) {
@@ -164,7 +164,7 @@ import { getAnalytics } from "firebase/analytics";
             let tesouro = getInputVal('treasure');
  
             saveMonstro(ND,nome,tipo,subtipo,tamanho,armadura,fortitude,reflexo, vontade, vida, deslocamento, valor_acerto,dano,forca,destreza,constituicao,inteligencia,sabedoria,carisma,tesouro);
-            document.getElementById('contactForm').reset();
+            document.getElementById('monstroForm').reset();
         }
  
         // Function to get form values
