@@ -44,6 +44,12 @@ color:black;
 </head>
 <body>
     <h1>Monstros Tormenta</h1>
+
+
+    <Label> Nomes</Label>
+    <select id="NomeInp" disabled>
+        <option value="select">select</option>
+    </select>
     <div class="container">
    <div class="square">
 
@@ -69,5 +75,72 @@ color:black;
 
        
     </div>
+
+
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyD4pj-vv2AUd9BUjMpGppHrgK7aFkfQ96Q",
+          authDomain: "tormenta-projeto.firebaseapp.com",
+          databaseURL: "https://tormenta-projeto-default-rtdb.firebaseio.com",
+          projectId: "tormenta-projeto",
+          storageBucket: "tormenta-projeto.firebasestorage.app",
+          messagingSenderId: "840338790531",
+          appId: "1:840338790531:web:713b137e4fc6a8640623b6",
+          measurementId: "G-H43EHD51KJ"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+       
+        const analytics = getAnalytics(app);
+        import {getDatabase, ref, child, get} from "firebase/database";
+        const db = getDatabase();
+        let NomesInp=document.getElementById('NomeInp');
+
+        function Getnomes(){
+            const dbRef = ref(db);
+
+            get(child(dbRef, 'Nomes/')).then((nomes)=>){
+                if(nomes.exist()){
+                    nomes.val().map((nome) => {
+                        let opt = document.createElement('option');
+                        opt.value = nome;
+                        opt.innerText= nome;
+                        NomesInp.Append(opt);
+                    })
+                    NomeInp.disabled = false; // abre o select
+                }
+            }
+        }
+        function GetTipos(){
+            const dbRef = ref(db);
+
+            TiposInp.innerHTML = '<option value="select">select</option>';
+            TiposInp.disabled=true; //desativa o select
+            get(child(dbRef, 'Tipos/'+CountryInp.value)).then((tipos)=>){
+                if(tipos.exist()){
+                    tipos.val().map((tipo) => {
+                        let opt = document.createElement('option');
+                        opt.value = tipo;
+                        opt.innerText= tipo;
+                        TiposInp.Append(opt);
+                    })
+                    TiposInp.disabled = false; // abre o select
+                }
+            }
+        }
+
+        window.addEventListener('load', Getnomes);
+        NomeInp.addEventListener('change',GetTipos);
+      </script>
 </body>
 </html>
