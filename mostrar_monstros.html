@@ -116,6 +116,12 @@ color:black;
                 }
             }
         }
+        function ShowInfo(event) {
+            const selectedKey = event.target.value;
+            if (selectedKey === "select") {
+                infoDiv.style.display = "none"; // Esconde o painel de informações
+                return;
+            }
             const dbRef = ref(db);
             get(child(dbRef, `Nomes/${selectedKey}`)).then((snapshot) => {
                 if (snapshot.exists()) {
