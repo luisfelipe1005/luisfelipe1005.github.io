@@ -53,21 +53,21 @@ color:black;
     <div class="container">
    <div class="square">
 
-<h id:"nome">Luis Felipe Barbosa Lopes</h> 
+<h id="nome">Luis Felipe Barbosa Lopes</h> 
  <hr style="height:3px;border-width:0;color:gray;background-color:orange">
 <div class="square" style="background-color:orange">
-<h id:"ND"> ND 1</h></div>
+<h id="ND"> ND 1</h></div>
 <br>
-<h id:"tipos">humanoide(humano)</h> 
-<h id:"tamanho">medio</h> 
-<h id: "classf">Solo</h> 
+<h id="tipos">humanoide(humano)</h> 
+<h id="tamanho">medio</h> 
+<h id="" "classf">Solo</h> 
 <br>
-<h id:"iniciativa">iniciativa:+4</h> 
-<h id:"percepcao">percepção:+2</h> 
+<h id="iniciativa">iniciativa:+4</h> 
+<h id="percepcao">percepção:+2</h> 
 <br>
-<h id:"PV">Pontos de vida 30</h>
+<h id="PV">Pontos de vida 30</h>
 <br> 
-<h id: "deslocamento">Deslocamento: 9m(6q)</h>
+<h id= "deslocamento">Deslocamento: 9m(6q)</h>
 <br>
  <hr style="height:3px;border-width:0;color:gray;background-color:orange">
 <h><b>Corpo a Corpo</b> Machado de batalha +17 (2d6+15, x3) </h>
@@ -109,13 +109,13 @@ color:black;
         function Getnomes(){
             const dbRef = ref(db);
 
-            get(child(dbRef, 'Nomes/')).then((nomes)=>){
+            get(child(dbRef, 'Nomes/')).then((nomes)=>{
                 if(nomes.exist()){
                     nomes.val().map((nome) => {
                         let opt = document.createElement('option');
                         opt.value = nome;
                         opt.innerText= nome;
-                        NomesInp.Append(opt);
+                        NomesInp.AppendChild(opt);
                     })
                     NomeInp.disabled = false; // abre o select
                 }
@@ -126,7 +126,7 @@ color:black;
 
             TiposInp.innerHTML = '<option value="select">select</option>';
             TiposInp.disabled=true; //desativa o select
-            get(child(dbRef, 'Tipos/'+CountryInp.value)).then((tipos)=>){
+            get(child(dbRef, 'Tipos/'+CountryInp.value)).then((tipos)=>{
                 if(tipos.exist()){
                     tipos.val().map((tipo) => {
                         let opt = document.createElement('option');
