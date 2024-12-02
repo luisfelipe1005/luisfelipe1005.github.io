@@ -48,32 +48,17 @@ color:black;
 
     <Label> Nomes</Label>
     <select id="NomeInp" disabled>
-        <option value="select">select</option>
+        <option value="select">Selecione:</option>
     </select>
-    <div class="container">
-   <div class="square">
 
-<h id="nome">Luis Felipe Barbosa Lopes</h> 
- <hr style="height:3px;border-width:0;color:gray;background-color:orange">
-<div class="square" style="background-color:orange">
-<h id="ND"> ND 1</h></div>
-<br>
-<h id="tipos">humanoide(humano)</h> 
-<h id="tamanho">medio</h> 
-<h id="" "classf">Solo</h> 
-<br>
-<h id="iniciativa">iniciativa:+4</h> 
-<h id="percepcao">percepção:+2</h> 
-<br>
-<h id="PV">Pontos de vida 30</h>
-<br> 
-<h id= "deslocamento">Deslocamento: 9m(6q)</h>
-<br>
- <hr style="height:3px;border-width:0;color:gray;background-color:orange">
-<h><b>Corpo a Corpo</b> Machado de batalha +17 (2d6+15, x3) </h>
-</div>
-
-       
+    <div id="info" class="square" style="display: none;">
+        <h id="nome"></h>
+        <p id="tipo"></p>
+        <p id="tamanho"></p>
+        <p id="ND"></p>
+        <p id="vida"></p>
+        <p id="dano"></p>
+        <p id="tesouro"></p>
     </div>
 
 
@@ -100,20 +85,30 @@ color:black;
       
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-       
-        const analytics = getAnalytics(app);
-        import {getDatabase, ref, child, get} from "firebase/database";
         const db = getDatabase();
-        let NomesInp=document.getElementById('NomeInp');
+       
+        const NomesInp = document.getElementById('NomeInp');
+        const infoDiv = document.getElementById('info');
+
+        // Elementos para exibir os dados
+        const nomeElem = document.getElementById('nome');
+        const tipoElem = document.getElementById('tipo');
+        const tamanhoElem = document.getElementById('tamanho');
+        const NDElem = document.getElementById('ND');
+        const vidaElem = document.getElementById('vida');
+        const danoElem = document.getElementById('dano');
+        const tesouroElem = document.getElementById('tesouro');
 
         function Getnomes(){
             const dbRef = ref(db);
 
-            get(child(dbRef, 'Nomes/')).then((nomes)=>{
-                if(nomes.exist()){
-                    nomes.val().map((nome) => {
-                        let opt = document.createElement('option');
-                        opt.value = nome;
+            get(child(dbRef, 'Nomes/')).then((snapshot)=>{
+                if(snapshot.exist()){
+                const nomesData= snapshot.val();
+		Object.keys(nomesData[key].nome;
+		const opt=document.createElement('option);
+
+                        opt.value = key;
                         opt.innerText= nome;
                         NomesInp.AppendChild(opt);
                     })
@@ -121,22 +116,22 @@ color:black;
                 }
             }
         }
-        function GetTipos(){
             const dbRef = ref(db);
-
-            TiposInp.innerHTML = '<option value="select">select</option>';
-            TiposInp.disabled=true; //desativa o select
-            get(child(dbRef, 'Tipos/'+CountryInp.value)).then((tipos)=>{
-                if(tipos.exist()){
-                    tipos.val().map((tipo) => {
-                        let opt = document.createElement('option');
-                        opt.value = tipo;
-                        opt.innerText= tipo;
-                        TiposInp.Append(opt);
-                    })
-                    TiposInp.disabled = false; // abre o select
+            get(child(dbRef, `Nomes/${selectedKey}`)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    nomeElem.innerText = `Nome: ${data.nome}`;
+                    tipoElem.innerText = `Tipo: ${data.tipo}`;
+                    tamanhoElem.innerText = `Tamanho: ${data.tamanho}`;
+                    NDElem.innerText = `ND: ${data.ND}`;
+                    vidaElem.innerText = `Vida: ${data.vida}`;
+                    danoElem.innerText = `Dano: ${data.dano}`;
+                    tesouroElem.innerText = `Tesouro: ${data.tesouro}`;
+                    infoDiv.style.display = "block"; // Mostra o painel de informações
                 }
-            }
+            }).catch((error) => {
+                console.error("Erro ao obter informações:", error);
+            });
         }
 
         window.addEventListener('load', Getnomes);
