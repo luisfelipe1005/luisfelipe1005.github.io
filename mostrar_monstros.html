@@ -86,7 +86,7 @@ color:black;
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getDatabase();
-       
+        import { getDatabase, ref, child, get } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
         const NomesInp = document.getElementById('NomeInp');
         const infoDiv = document.getElementById('info');
 
@@ -103,16 +103,16 @@ color:black;
             const dbRef = ref(db);
 
             get(child(dbRef, 'Nomes/')).then((snapshot)=>{
-                if(snapshot.exist()){
+                if(snapshot.exists()){
                 const nomesData= snapshot.val();
-		Object.keys(nomesData[key].nome;
-		const opt=document.createElement('option);
-
-                        opt.value = key;
-                        opt.innerText= nome;
-                        NomesInp.AppendChild(opt);
-                    })
-                    NomeInp.disabled = false; // abre o select
+                Object.keys(nomesData).forEach((key) => {
+                    const nome = nomesData[key].nome;
+                        const opt = document.createElement('option');
+                        opt.value = key; // A chave será usada para buscar detalhes do monstro
+                        opt.innerText = nome;
+                        NomesInp.appendChild(opt);
+                    });
+                    NomesInp.disabled = false; // abre o select
                 }
             }
         }
@@ -141,7 +141,7 @@ color:black;
         }
 
         window.addEventListener('load', Getnomes);
-        NomeInp.addEventListener('change',GetTipos);
+        NomesInp.addEventListener('change', ShowInfo);
       </script>
 </body>
 </html>
