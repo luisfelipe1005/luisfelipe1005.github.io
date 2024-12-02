@@ -63,85 +63,63 @@ color:black;
 
 
 
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-      
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        const firebaseConfig = {
-          apiKey: "AIzaSyD4pj-vv2AUd9BUjMpGppHrgK7aFkfQ96Q",
-          authDomain: "tormenta-projeto.firebaseapp.com",
-          databaseURL: "https://tormenta-projeto-default-rtdb.firebaseio.com",
-          projectId: "tormenta-projeto",
-          storageBucket: "tormenta-projeto.firebasestorage.app",
-          messagingSenderId: "840338790531",
-          appId: "1:840338790531:web:713b137e4fc6a8640623b6",
-          measurementId: "G-H43EHD51KJ"
-        };
-      
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase();
-        import { getDatabase, ref, child, get } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
-        const NomesInp = document.getElementById('NomeInp');
-        const infoDiv = document.getElementById('info');
+    ...
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { getDatabase, ref, child, get } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 
-        // Elementos para exibir os dados
-        const nomeElem = document.getElementById('nome');
-        const tipoElem = document.getElementById('tipo');
-        const tamanhoElem = document.getElementById('tamanho');
-        const NDElem = document.getElementById('ND');
-        const vidaElem = document.getElementById('vida');
-        const danoElem = document.getElementById('dano');
-        const tesouroElem = document.getElementById('tesouro');
+    const firebaseConfig = {
+        apiKey: "AIzaSyD4pj-vv2AUd9BUjMpGppHrgK7aFkfQ96Q",
+        authDomain: "tormenta-projeto.firebaseapp.com",
+        databaseURL: "https://tormenta-projeto-default-rtdb.firebaseio.com",
+        projectId: "tormenta-projeto",
+        storageBucket: "tormenta-projeto.firebasestorage.app",
+        messagingSenderId: "840338790531",
+        appId: "1:840338790531:web:713b137e4fc6a8640623b6",
+        measurementId: "G-H43EHD51KJ",
+    };
 
-        function Getnomes(){
-            const dbRef = ref(db);
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const monstrosRef = ref(db, "Monstros");
+    const NomesInp = document.getElementById("NomeInp");
+    const infoDiv = document.getElementById("info");
 
-            get(child(dbRef, 'Monstros/')).then((snapshot)=>{
-                if(snapshot.exists()){
-                const nomesData= snapshot.val();
-                Object.keys(nomesData).forEach((key) => {
-                    const nome = nomesData[key].nome;
-                        const opt = document.createElement('option');
-                        opt.value = key; // A chave será usada para buscar detalhes do monstro
-                        opt.innerText = nome;
-                        NomesInp.appendChild(opt);
-                    });
-                    NomesInp.disabled = false; // abre o select
-                }
-            }
+    const showInfo = async (key) => {
+        if (key === "select") {
+            infoDiv.style.display = "none";
+            return;
         }
-        function ShowInfo(event) {
-            const selectedKey = event.target.value;
-            if (selectedKey === "select") {
-                infoDiv.style.display = "none"; // Esconde o painel de informações
-                return;
-            }
-            const dbRef = ref(db);
-            get(child(dbRef, `Monstros/${selectedKey}`)).then((snapshot) => {
-                if (snapshot.exists()) {
-                    const data = snapshot.val();
-                    nomeElem.innerText = `Nome: ${data.nome}`;
-                    tipoElem.innerText = `Tipo: ${data.tipo}`;
-                    tamanhoElem.innerText = `Tamanho: ${data.tamanho}`;
-                    NDElem.innerText = `ND: ${data.ND}`;
-                    vidaElem.innerText = `Vida: ${data.vida}`;
-                    danoElem.innerText = `Dano: ${data.dano}`;
-                    tesouroElem.innerText = `Tesouro: ${data.tesouro}`;
-                    infoDiv.style.display = "block"; // Mostra o painel de informações
-                }
-            }).catch((error) => {
-                console.error("Erro ao obter informações:", error);
+        const snapshot = await get(child(monstrosRef, key));
+        if (snapshot.exists()) {
+            const { nome, tipo, tamanho, ND, vida, dano, tesouro } = snapshot.val();
+            document.getElementById("nome").innerText = `Nome: ${nome}`;
+            document.getElementById("tipo").innerText = `Tipo: ${tipo}`;
+            document.getElementById("tamanho").innerText = `Tamanho: ${tamanho}`;
+            document.getElementById("ND").innerText = `ND: ${ND}`;
+            document.getElementById("vida").innerText = `Vida: ${vida}`;
+            document.getElementById("dano").innerText = `Dano: ${dano}`;
+            document.getElementById("tesouro").innerText = `Tesouro: ${tesouro}`;
+            infoDiv.style.display = "block";
+        }
+    };
+
+    const fetchMonstros = async () => {
+        const snapshot = await get(monstrosRef);
+        if (snapshot.exists()) {
+            const monstros = snapshot.val();
+            Object.entries(monstros).forEach(([key, monstro]) => {
+                const option = document.createElement("option");
+                option.value = key;
+                option.innerText = monstro.nome;
+                NomesInp.appendChild(option);
             });
+            NomesInp.disabled = false;
         }
+    };
 
-        window.addEventListener('load', Getnomes);
-        NomesInp.addEventListener('change', ShowInfo);
-      </script>
+    window.addEventListener("load", fetchMonstros);
+    NomesInp.addEventListener("change", (e) => showInfo(e.target.value));
+</script>
 </body>
 </html>
