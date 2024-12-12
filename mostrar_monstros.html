@@ -16,7 +16,16 @@
         }
 .square {
 color:black;
-  background-color: white;
+display: flex;
+justify-content: center;
+  max-width: 50%;
+height: 100vh;
+align-items: center;
+border-radius: 10px;
+margin: 0;
+padding: 20px;
+background-color: #ed9815;
+text-align: left;
 }
         h1 {
             margin-bottom: 30px;
@@ -53,11 +62,14 @@ color:black;
 
     <div id="info" class="square" style="display: none;">
         <h id="nome"></h>
-        <p id="tipo"></p>
-        <p id="tamanho"></p>
         <p id="ND"></p>
+        <p id="2linha"></p>
+        <p id="tamanho"></p>
         <p id="vida"></p>
-        <p id="dano"></p>
+        <p id="ataque"></p>
+        <p id="3linha"></p>
+        <p id="4linha"></p>
+        <p id="atributos"></p>
         <p id="tesouro"></p>
     </div>
 
@@ -92,13 +104,15 @@ color:black;
         }
         const snapshot = await get(child(monstrosRef, key));
         if (snapshot.exists()) {
-            const { nome, tipo, tamanho, ND, vida, dano, tesouro } = snapshot.val();
-            document.getElementById("nome").innerText = `Nome: ${nome}`;
-            document.getElementById("tipo").innerText = `Tipo: ${tipo}`;
-            document.getElementById("tamanho").innerText = `Tamanho: ${tamanho}`;
-            document.getElementById("ND").innerText = `ND: ${ND}`;
+            const { ND,nome,tipo,subtipo,tamanho,armadura, percepcao, iniciativa,fortitude,reflexo, vontade, vida, deslocamento, valor_acerto,dano,forca,destreza,constituicao,inteligencia,sabedoria,carisma,tesouro } = snapshot.val();
+            document.getElementById("nome").innerText = `${nome}`;
+            document.getElementById("2linha").innerText = `${tipo}(${subtipo}) ${tamanho}`;
+            document.getElementById("ND").innerText = `ND ${ND}`;
+            document.getElementById("3linha").innerText = `Iniciativa ${iniciativa} Percepção ${percepcao}`;
+            document.getElementById("4linha").innerText = `Defesa ${armadura} Fort ${fortitude} Ref ${reflexo} Von ${vontade} `;
             document.getElementById("vida").innerText = `Vida: ${vida}`;
-            document.getElementById("dano").innerText = `Dano: ${dano}`;
+            document.getElementById("ataque").innerText = `Corpo a corpo mordida ${valor_acerto}(${dano})`;
+            document.getElementById("atributos").innerText = `For ${forca} Des ${destreza} Con ${constituicao} Int ${inteligencia} Sab ${sabedoria} Car ${carisma}  `;
             document.getElementById("tesouro").innerText = `Tesouro: ${tesouro}`;
             infoDiv.style.display = "block";
         }
