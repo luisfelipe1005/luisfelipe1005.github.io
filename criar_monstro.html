@@ -8,7 +8,6 @@
             background-image: url('https://cdna.artstation.com/p/assets/images/images/071/393/288/large/pietro-antognioni-0-avatar-kallyadranoch.jpg?1705075129'); /* URL da imagem */
             background-size: cover; /* Faz a imagem cobrir todo o fundo */
             background-repeat: no-repeat; /* Impede a repetição da imagem */
-            background-position: center; /* Centraliza a imagem */
             height: 100vh; /* Define a altura para ocupar a tela toda */
             margin: 0; /* Remove margens padrão */
         }
@@ -20,15 +19,26 @@
 <body>
     <h1>Criador manual de monstros.</h1>
     <p>Adicione as caracteristicas do seu monstro aqui:.</p>
-    <form id="monstroForm" action="/index.html">
+    <form id="monstroForm" >
       <label for="desafio">Nivel de Desafio:</label><br>
-      <input type="number" id="ND" name="nd" ><br>
+      <input type="number" id="ND" name="nd" min="0" max="22"  oninput="validateND(this)"><br>
       <label for="name">Nome do monstro:</label>
       <br>
       <input type="text" id="name" name="name"><br>
+
+<label for="size">Papel do monstro em combate:</label>
+  <br>
+  <select name="papel" id="papel">
+  <option value=""></option>
+    <option value="solo">Solo</option>
+    <option value="lacaio">Lacaio</option>
+    <option value="especial">Especial</option>
+  </select>
+  <br>
   <label for="type">Tipo do monstro:</label>
   <br>
   <select name="type" id="type">
+  <option value=""></option>
     <option value="animal">Animal</option>
     <option value="construto">Construto</option>
     <option value="espirito">Espírito</option>
@@ -50,13 +60,9 @@
   <br>
   <label for="text">iniciativa:</label>
   <br>
-  <input type="text" id="iniciativa" name="iniciativa>
-  <br>
-  
-   <br>
-    
-    
-      <label for="size">Tamanho do monstro:</label>
+  <input type="text" id="iniciativa" name="iniciativa">
+     <br>  
+<label for="size">Tamanho do monstro:</label>
   <br>
   <select name="size" id="size">
   <option value=""></option>
@@ -82,10 +88,9 @@
   <input type="number" id="von" name="vontade" ><br>
   
   <label for="pv">pontos de vida:</label><br>
-  <input type="number" id="pv" name="pontos de vida" ><br><br>
+  <input type="number" id="pv" name="pontos de vida" ><br>
   <label for="deslocamento">deslocamento:</label><br>
   <input type="number" id="deslocamento" name="deslocamento" ><br>
-   <br>
   <label for="pv">valor de acerto:</label><br>
   <input type="number" id="valatq" name="valor ataque" ><br>
   <label for="des">dano medio:</label><br>
@@ -123,6 +128,22 @@
     <script src=
 "https://www.gstatic.com/firebasejs/3.7.4/firebase.js">
     </script>
+<script>
+function validateND(input) {
+    let value = parseFloat(input.value);
+
+    if (value === 0.25 || value === 0.5 || Number.isInteger(value) && value >= 1) {
+        
+        return;
+    } else {
+        // Se o valor for inválido, limpa o campo ou define um valor padrão
+        input.value = '';
+    }
+}
+
+
+</script>
+
      
     <script>
         const firebaseConfig = {
@@ -142,7 +163,7 @@
          
         document.getElementById('monstroForm')
             .addEventListener('submit', submitForm);
- 
+}
         function submitForm(e) {
             e.preventDefault();
  
@@ -161,7 +182,8 @@
             let deslocamento = getInputVal('deslocamento');
             let valor_acerto = getInputVal('valatq');
             let percepcao = getInputVal('percepcao');
-            let valor_acerto = getInputVal('valatq');
+            let iniciativa= getInputVal('iniciativa');
+            let papel= getInputVal('papel');
             let dano = getInputVal('dano');
             let forca = getInputVal('for');
             let destreza = getInputVal('des');
@@ -171,7 +193,9 @@
             let carisma = getInputVal('car');
             let tesouro = getInputVal('treasure');
  
-            saveMonstro(ND,nome,tipo,subtipo,tamanho,armadura,fortitude,reflexo, vontade, vida, deslocamento, valor_acerto,dano,forca,destreza,constituicao,inteligencia,sabedoria,carisma,tesouro);
+            saveMonstro(ND, nome, tipo, subtipo, tamanho, armadura, fortitude, reflexo, vontade,
+    vida, deslocamento, iniciativa, percepcao, papel, valor_acerto, dano,
+    forca, destreza, constituicao, inteligencia, sabedoria, carisma, tesouro);
             document.getElementById('monstroForm').reset();
         }
  
@@ -181,7 +205,8 @@
         }
  
         // Salva o monstro no firebase
-        function saveMonstro(ND,nome,tipo,subtipo,tamanho,armadura,fortitude,reflexo, vontade, vida, deslocamento, valor_acerto,dano,forca,destreza,constituicao,inteligencia,sabedoria,carisma,tesouro){
+        function saveMonstro(ND,nome,tipo,subtipo,tamanho,armadura,fortitude,reflexo, vontade, vida, deslocamento,iniciativa, percepcao, papel, valor_acerto,dano,forca,destreza,constituicao,inteligencia,sabedoria,carisma,tesouro){
+alert('monstro criado')
             let newMonstroRef = monstrosRef.push();
             newMonstroRef.set({
                 ND: ND,
@@ -193,6 +218,9 @@
                 fortitude: fortitude,
                 reflexo: reflexo,
                 vontade: vontade,
+                iniciativa: iniciativa,
+                percepcao: percepcao,
+                papel: papel,
                 vida: vida,
                 deslocamento: deslocamento,
                 valor_acerto: valor_acerto,
