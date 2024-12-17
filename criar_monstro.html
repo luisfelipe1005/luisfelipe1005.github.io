@@ -1,177 +1,187 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
-            background-image: url('https://cdna.artstation.com/p/assets/images/images/071/393/288/large/pietro-antognioni-0-avatar-kallyadranoch.jpg?1705075129'); /* URL da imagem */
-            background-size: cover; /* Faz a imagem cobrir todo o fundo */
-            background-repeat: no-repeat; /* Impede a repetição da imagem */
-            height: 100vh; /* Define a altura para ocupar a tela toda */
-            margin: 0; /* Remove margens padrão */
+            background-image: url('https://cdna.artstation.com/p/assets/images/images/071/393/288/large/pietro-antognioni-0-avatar-kallyadranoch.jpg?1705075129');
+            /* URL da imagem */
+            background-size: cover;
+            /* Faz a imagem cobrir todo o fundo */
+            background-repeat: no-repeat;
+            /* Impede a repetição da imagem */
+            height: 100vh;
+            /* Define a altura para ocupar a tela toda */
+            margin: 0;
+            /* Remove margens padrão */
         }
-        label{
-        text-font:"white";
+
+        label {
+            text-font: "white";
         }
     </style>
 </head>
+
 <body>
     <h1>Criador manual de monstros.</h1>
     <p>Adicione as caracteristicas do seu monstro aqui:.</p>
-    <form id="monstroForm" >
-      <label for="desafio">Nivel de Desafio:</label><br>
-      <input type="number" id="ND" name="nd" min="0" max="22"  oninput="validateND(this)"><br>
-      <label for="name">Nome do monstro:</label>
-      <br>
-      <input type="text" id="name" name="name"><br>
+    <form id="monstroForm">
+        <label for="desafio">Nivel de Desafio:</label><br>
 
-<label for="size">Papel do monstro em combate:</label>
-  <br>
-  <select name="papel" id="papel">
-  <option value=""></option>
-    <option value="solo">Solo</option>
-    <option value="lacaio">Lacaio</option>
-    <option value="especial">Especial</option>
-  </select>
-  <br>
-  <label for="type">Tipo do monstro:</label>
-  <br>
-  <select name="type" id="type">
-  <option value=""></option>
-    <option value="animal">Animal</option>
-    <option value="construto">Construto</option>
-    <option value="espirito">Espírito</option>
-    <option value="humanoide">Humanoide</option>
-    
-    <option value="monstro">Monstro</option>
-    <option value="undead">Morto-vivo</option>
-  </select>
-  <br>
-  
-  
-  <label for="subtype">Subtipo do monstro:</label>
-  <br>
-  <input type="text" id="subtype" name="subtype">
-  <br>
-  <label for="percepcao">Percepção:</label>
-  <br>
-  <input type="text" id="percepcao" name="percepcao">
-  <br>
-  <label for="text">iniciativa:</label>
-  <br>
-  <input type="text" id="iniciativa" name="iniciativa">
-     <br>  
-<label for="size">Tamanho do monstro:</label>
-  <br>
-  <select name="size" id="size">
-  <option value=""></option>
-    <option value="minusculo">Minúsculo</option>
-    <option value="pequeno">Pequeno</option>
-    <option value="medio">Médio</option>
-    <option value="grande">Grande</option>  
-    <option value="enorme">Enorme</option>
-    <option value="colossal">Colossal</option>
-  </select>
-  <br>
-    
-    
-  <label for="defesa">Defesa:</label><br>
-    <input type="number" id="CA" name="defesa" ><br>
-     
-   <label for="fort">fortitude:</label><br>
-  <input type="number" id="fort" name="fortitude" >
-  <br>
-    <label for="ref">reflexo:</label><br>
-  <input type="number" id="ref" name="reflexo" > <br>
-  <label for="von">vontade:</label><br>
-  <input type="number" id="von" name="vontade" ><br>
-  
-  <label for="pv">pontos de vida:</label><br>
-  <input type="number" id="pv" name="pontos de vida" ><br>
-  <label for="deslocamento">deslocamento:</label><br>
-  <input type="number" id="deslocamento" name="deslocamento" ><br>
-  <label for="pv">valor de acerto:</label><br>
-  <input type="number" id="valatq" name="valor ataque" ><br>
-  <label for="des">dano medio:</label><br>
-  <input type="number" id="dano" name="dano" ><br>
-  
-  <label for="for">FOR</label>
-  <input type="number" id="for" name="for" ><br>
-  
-  <label for="des">DES</label>
-  <input type="number" id="des" name="des" ><br>
-  
-  <label for="con">CON</label>
-  <input type="number" id="con" name="con" ><br>
-  
-  <label for="for">INT</label>
-  <input type="number" id="int" name="int" ><br>
-  
-  <label for="des">SAB</label>
-  <input type="number" id="sab" name="sab" ><br>
-  
-  <label for="con">CAR</label>
-  <input type="number" id="car" name="car" ><br>
-  <br>
-   <label for="treasure">Tesouro:</label>
-  <br>
-  <input type="text" id="treasure" name="treasure"><br>
-  <button type="submit" class="btn btn-primary"
-                style="margin-left: 15px; margin-top: 10px">
-                Submit
-            </button>
+        <input type="number" id="ND" name="nd" min="0" max="22" oninput="validateND(this)"><br>
+
+        <label for="size">Papel do monstro em combate:</label>
+        <br>
+        <select name="papel" id="papel">
+            <option value=""></option>
+            <option value="solo">Solo</option>
+            <option value="lacaio">Lacaio</option>
+            <option value="especial">Especial</option>
+        </select>
+
+        <br>
+        <button class="button" type="button" style=" margin-top: 10px" onclick="preenchetudo()">
+            Auto-preencher todas
+        </button>
+        <br>
+        <label for="name">Nome do monstro:</label>
+        <br>
+        <input type="text" id="name" name="name"><br>
+
         
-</form>
+        <label for="type">Tipo do monstro:</label>
+        <br>
+        <select name="type" id="type">
+            <option value=""></option>
+            <option value="animal">Animal</option>
+            <option value="construto">Construto</option>
+            <option value="espirito">Espírito</option>
+            <option value="humanoide">Humanoide</option>
+
+            <option value="monstro">Monstro</option>
+            <option value="undead">Morto-vivo</option>
+        </select>
+        <br>
 
 
-    <script src=
-"https://www.gstatic.com/firebasejs/3.7.4/firebase.js">
+        <label for="subtype">Subtipo do monstro:</label>
+        <br>
+        <input type="text" id="subtype" name="subtype">
+        <br>
+        <label for="text">iniciativa:</label>
+        <br>
+        <input type="text" id="iniciativa" name="iniciativa">
+        <br>
+        <label for="size">Tamanho do monstro:</label>
+        <br>
+        <select name="size" id="size">
+            <option value=""></option>
+            <option value="minusculo">Minúsculo</option>
+            <option value="pequeno">Pequeno</option>
+            <option value="medio">Médio</option>
+            <option value="grande">Grande</option>
+            <option value="enorme">Enorme</option>
+            <option value="colossal">Colossal</option>
+        </select>
+        <br>
+
+
+        <label for="defesa">Defesa:</label><br>
+        <input type="number" id="CA" name="defesa"><br>
+
+        <label for="fort">fortitude:</label><br>
+        <input type="number" id="fort" name="fortitude">
+        <br>
+        <label for="ref">reflexo:</label><br>
+        <input type="number" id="ref" name="reflexo"> <br>
+        <label for="von">vontade:</label><br>
+        <input type="number" id="von" name="vontade"><br>
+
+        <label for="pv">pontos de vida:</label><br>
+        <input type="number" id="pv" name="pontos de vida"><br>
+        <label for="deslocamento">deslocamento:</label><br>
+        <input type="number" id="deslocamento" name="deslocamento"><br>
+        <label for="pv">valor de acerto:</label><br>
+        <input type="number" id="valatq" name="valor ataque"><br>
+        <label for="des">dano medio:</label><br>
+        <input type="number" id="dano" name="dano"><br>
+
+        <label for="for">FOR</label>
+        <input type="number" id="for" name="for"><br>
+
+        <label for="des">DES</label>
+        <input type="number" id="des" name="des"><br>
+
+        <label for="con">CON</label>
+        <input type="number" id="con" name="con"><br>
+
+        <label for="for">INT</label>
+        <input type="number" id="int" name="int"><br>
+
+        <label for="des">SAB</label>
+        <input type="number" id="sab" name="sab"><br>
+
+        <label for="con">CAR</label>
+        <input type="number" id="car" name="car"><br>
+        <br>
+        <label for="treasure">Tesouro:</label>
+        <br>
+        <input type="text" id="treasure" name="treasure"><br>
+        <button type="submit" class="btn btn-primary" style="margin-left: 15px; margin-top: 10px">
+            Submit
+        </button>
+
+    </form>
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js">
     </script>
-<script>
-function validateND(input) {
-    let value = parseFloat(input.value);
+    <script>
+        function validateND(input) {
+            let value = parseFloat(input.value);
 
-    if (value === 0.25 || value === 0.5 || Number.isInteger(value) && value >= 1) {
-        
-        return;
-    } else {
-        // Se o valor for inválido, limpa o campo ou define um valor padrão
-        input.value = '';
-    }
-}
+            if (value === 0.25 || value === 0.5 || Number.isInteger(value) && value >= 1) {
+
+                return;
+            } else {
+                // Se o valor for inválido, limpa o campo ou define um valor padrão
+                input.value = '';
+            }
+        }
 
 
-</script>
+    </script>
 
-     
+
     <script>
         const firebaseConfig = {
-  apiKey: "AIzaSyD4pj-vv2AUd9BUjMpGppHrgK7aFkfQ96Q",
-  authDomain: "tormenta-projeto.firebaseapp.com",
-  databaseURL: "https://tormenta-projeto-default-rtdb.firebaseio.com",
-  projectId: "tormenta-projeto",
-  storageBucket: "tormenta-projeto.firebasestorage.app",
-  messagingSenderId: "840338790531",
-  appId: "1:840338790531:web:713b137e4fc6a8640623b6",
-  measurementId: "G-H43EHD51KJ"
-};
- 
+            apiKey: "AIzaSyD4pj-vv2AUd9BUjMpGppHrgK7aFkfQ96Q",
+            authDomain: "tormenta-projeto.firebaseapp.com",
+            databaseURL: "https://tormenta-projeto-default-rtdb.firebaseio.com",
+            projectId: "tormenta-projeto",
+            storageBucket: "tormenta-projeto.firebasestorage.app",
+            messagingSenderId: "840338790531",
+            appId: "1:840338790531:web:713b137e4fc6a8640623b6",
+            measurementId: "G-H43EHD51KJ"
+        };
+
         firebase.initializeApp(firebaseConfig);
- 
+
         let monstrosRef = firebase.database().ref('Monstros');
-         
+
         document.getElementById('monstroForm')
             .addEventListener('submit', submitForm);
-}
+
         function submitForm(e) {
             e.preventDefault();
- 
+
             // Get values
             let ND = getInputVal('ND');
             let nome = getInputVal('name');
             let tipo = getInputVal('type');
-           
+
             let subtipo = getInputVal('subtype');
             let tamanho = getInputVal('size');
             let armadura = getInputVal('CA');
@@ -181,9 +191,8 @@ function validateND(input) {
             let vida = getInputVal('pv');
             let deslocamento = getInputVal('deslocamento');
             let valor_acerto = getInputVal('valatq');
-            let percepcao = getInputVal('percepcao');
-            let iniciativa= getInputVal('iniciativa');
-            let papel= getInputVal('papel');
+            let iniciativa = getInputVal('iniciativa');
+            let papel = getInputVal('papel');
             let dano = getInputVal('dano');
             let forca = getInputVal('for');
             let destreza = getInputVal('des');
@@ -192,21 +201,21 @@ function validateND(input) {
             let sabedoria = getInputVal('sab');
             let carisma = getInputVal('car');
             let tesouro = getInputVal('treasure');
- 
+
             saveMonstro(ND, nome, tipo, subtipo, tamanho, armadura, fortitude, reflexo, vontade,
-    vida, deslocamento, iniciativa, percepcao, papel, valor_acerto, dano,
-    forca, destreza, constituicao, inteligencia, sabedoria, carisma, tesouro);
+                vida, deslocamento, iniciativa,  papel, valor_acerto, dano,
+                forca, destreza, constituicao, inteligencia, sabedoria, carisma, tesouro);
             document.getElementById('monstroForm').reset();
         }
- 
+
         // Function to get form values
         function getInputVal(id) {
             return document.getElementById(id).value;
         }
- 
+
         // Salva o monstro no firebase
-        function saveMonstro(ND,nome,tipo,subtipo,tamanho,armadura,fortitude,reflexo, vontade, vida, deslocamento,iniciativa, percepcao, papel, valor_acerto,dano,forca,destreza,constituicao,inteligencia,sabedoria,carisma,tesouro){
-alert('monstro criado')
+        function saveMonstro(ND, nome, tipo, subtipo, tamanho, armadura, fortitude, reflexo, vontade, vida, deslocamento, iniciativa, papel, valor_acerto, dano, forca, destreza, constituicao, inteligencia, sabedoria, carisma, tesouro) {
+            alert('monstro criado')
             let newMonstroRef = monstrosRef.push();
             newMonstroRef.set({
                 ND: ND,
@@ -219,7 +228,6 @@ alert('monstro criado')
                 reflexo: reflexo,
                 vontade: vontade,
                 iniciativa: iniciativa,
-                percepcao: percepcao,
                 papel: papel,
                 vida: vida,
                 deslocamento: deslocamento,
@@ -235,5 +243,55 @@ alert('monstro criado')
             });
         }
     </script>
+
+    <script>
+import preencheCA, preenchefor, preenchemed, preenchefra, preenchepv, preencheatq, preenchedano from '/Monstro.js'
+function preenchetudo(){
+    let ND = getInputVal('ND');
+let papel = getInputVal('papel');
+
+if (ND === '' ||  papel === '') {
+alert('para preencher automatico por favor preencha o ND dela e seu papel')
+    
+} 
+else{
+let template = 2;
+    let armadura = getInputVal('CA');
+            let fortitude = getInputVal('fort');
+            let reflexo = getInputVal('ref');
+            let vontade = getInputVal('von');
+            let vida = getInputVal('pv');
+            let deslocamento = getInputVal('deslocamento');
+            let valor_acerto = getInputVal('valatq');
+            let iniciativa = getInputVal('iniciativa');
+            let dano = getInputVal('dano');
+
+ if(armadura===''){
+  document.getElementById('CA').value = `${preencheCA(ND,papel)}`;
+}
+    if(fortitude===''){
+  document.getElementById('fort').value = `${preenchefor(ND,papel)}`;
+}
+  if(reflexo===''){
+  document.getElementById('ref').value = `${preenchemed(ND,papel)}`;
+} 
+ if(vontade===''){
+  document.getElementById('von').value = `${preenchefra(ND,papel)}`;
+}
+  if(vida ===''){
+  document.getElementById('pv').value = `${preenchepv(ND,papel)}`;
+} 
+ if(valor_acerto===''){
+  document.getElementById('valatq').value = `${preencheatq(ND,papel)}`;
+} 
+if(dano===''){
+  document.getElementById('dano').value = `${preenchedano(ND,papel)}`;
+}
+
+
+}
+}
+    </script>
 </body>
-</html>
+
+</html>1
