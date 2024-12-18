@@ -181,7 +181,7 @@ else{
         { ND: 22, resistencia: 38 },
   ];
 }
-const resultado = tabelaCA.find(item => item.ND === nd);
+const resultado = preenchefor.find(item => item.ND === nd);
 return resultado.resistencia;
 }
 
@@ -274,7 +274,7 @@ else{
     { ND: 22, resistencia: 33 },
   ];
 }
-const resultado = tabelaCA.find(item => item.ND === nd);
+const resultado = preenchemed.find(item => item.ND === nd);
 return resultado.resistencia;
 }
 
@@ -458,12 +458,12 @@ else{
   { ND: 22, vida: 2800 },
   ];
 }
-const resultado = tabelaCA.find(item => item.ND === nd);
+const resultado = tabelapv.find(item => item.ND === nd);
 return resultado.vida;
 }
 
 function preencheatq(nd, papel){
-  vartabelaatq
+  var tabelaatq
     if(papel===1){
     tabelaatq= [
       { ND: 0.25,ataque: 6 },
@@ -555,7 +555,7 @@ return resultado.ataque;
 }
 
 function preenchedano(nd, papel){
-  vartabeladano
+  var tabeladano
     if(papel===1){
     tabeladano= [
       { ND: 0.25,dano: 8 },
