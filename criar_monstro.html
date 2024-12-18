@@ -19,7 +19,7 @@
         }
 
         label {
-            text-font: "white";
+            color: "white";
         }
     </style>
 </head>
@@ -244,13 +244,17 @@
         }
     </script>
 
- <script type="module" src="Monstro.js">
-import {preencheCA, preenchefor, preenchemed, preenchefra, preenchepv, preencheatq, preenchedano} from '/Monstro.js'
+ <script type="module" > 
+ import { preencheCA, preenchefor, preenchemed, preenchefra, preenchepv, preencheatq, preenchedano } from './monstro.js';
+
+</script>
+<script>
 window.getInputVal = function (id) {
+  
     return document.getElementById(id).value;
 };
 
-function preenchetudo(){
+window.preenchetudo = function () {
     let ND = getInputVal('ND');
 let papel = getInputVal('papel');
 
@@ -296,8 +300,10 @@ if(dano===''){
 }
 return
 }
- window.preenchetudo = preenchetudo;
     </script>
+
+
+
 </body>
 
 </html>
