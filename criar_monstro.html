@@ -30,7 +30,7 @@
     <form id="monstroForm">
         <label for="desafio">Nivel de Desafio:</label><br>
 
-        <input type="number" id="ND" name="nd" min="0" max="22" oninput="validateND(this)"><br>
+        <input type="number" id="ND" name="nd" min="0" max="22" oninput="validateND(this)" ><br>
 
         <label for="size">Papel do monstro em combate:</label>
         <br>
@@ -70,10 +70,6 @@
         <br>
         <input type="text" id="subtype" name="subtype">
         <br>
-        <label for="text">iniciativa:</label>
-        <br>
-        <input type="text" id="iniciativa" name="iniciativa">
-        <br>
         <label for="size">Tamanho do monstro:</label>
         <br>
         <select name="size" id="size">
@@ -86,27 +82,79 @@
             <option value="colossal">Colossal</option>
         </select>
         <br>
+        <label for="deslocamento">deslocamento:</label><br>
+        <input type="number" id="deslocamento" name="deslocamento"><br>
 
 
         <label for="defesa">Defesa:</label><br>
-        <input type="number" id="CA" name="defesa"><br>
-
+        <input type="number" id="CA" name="defesa">
+<input type="number" id="ndca" name="ndca" value=ND.value>
+        <button class="button" type="button" style=" margin-top: 10px" onclick="encheCA()">
+          Preenche
+      </button>
+<br>
         <label for="fort">fortitude:</label><br>
         <input type="number" id="fort" name="fortitude">
+        
+        <select name="forpref" id="forpref">
+          <option value=""></option>
+          <option value="maior">Maior</option>
+          <option value="medio">Medio</option>
+          <option value="menor">Menor</option>
+      </select>
+
+<input type="number" id="ndfor" name="ndfor">
+
         <br>
         <label for="ref">reflexo:</label><br>
-        <input type="number" id="ref" name="reflexo"> <br>
+        <input type="number" id="ref" name="reflexo"> 
+        <select name="refpref" id="refpref">
+          <option value=""></option>
+          <option value="maior">Maior</option>
+          <option value="medio">Medio</option>
+          <option value="menor">Menor</option>
+      </select>
+<input type="number" id="ndref" name="ndref">
+        <button class="button" type="button" style=" margin-top: 10px" onclick="preencheres()">
+          Preenche resistencias
+      </button>
+      <br>
         <label for="von">vontade:</label><br>
-        <input type="number" id="von" name="vontade"><br>
+        <input type="number" id="von" name="vontade">
+        <select name="vonpref" id="vonpref">
+          <option value=""></option>
+          <option value="maior">Maior</option>
+          <option value="medio">Medio</option>
+          <option value="menor">Menor</option>
+      </select>
+<input type="number" id="ndvon" name="ndvon">
+
+      <br>
 
         <label for="pv">pontos de vida:</label><br>
-        <input type="number" id="pv" name="pontos de vida"><br>
-        <label for="deslocamento">deslocamento:</label><br>
-        <input type="number" id="deslocamento" name="deslocamento"><br>
+        <input type="number" id="pv" name="pontos de vida">
+
+<input type="number" id="ndpv" name="ndpv">
+        <button class="button" type="button" style=" margin-top: 10px" onclick="enchepv()">
+          Preenche
+      </button>
+      <br>
+
         <label for="pv">valor de acerto:</label><br>
-        <input type="number" id="valatq" name="valor ataque"><br>
-        <label for="des">dano medio:</label><br>
-        <input type="number" id="dano" name="dano"><br>
+        <input type="number" id="valatq" name="valor ataque">
+        
+<input type="number" id="ndatq" name="ndatq">
+        <button class="button" type="button" style=" margin-top: 10px" onclick="encheacerto()">
+          Preenche
+      </button><br>
+        <label for="dano">dano medio:</label><br>
+        <input type="number" id="dano" name="dano">
+
+<input type="number" id="nddano" name="nddano">
+        <button class="button" type="button" style=" margin-top: 10px" onclick="enchedano()">
+          Preenche
+      </button>
+      <br>
 
         <label for="for">FOR</label>
         <input type="number" id="for" name="for"><br>
@@ -117,18 +165,28 @@
         <label for="con">CON</label>
         <input type="number" id="con" name="con"><br>
 
-        <label for="for">INT</label>
+        <label for="int">INT</label>
         <input type="number" id="int" name="int"><br>
 
-        <label for="des">SAB</label>
+        <label for="sab">SAB</label>
         <input type="number" id="sab" name="sab"><br>
 
-        <label for="con">CAR</label>
+        <label for="car">CAR</label>
         <input type="number" id="car" name="car"><br>
         <br>
-        <label for="treasure">Tesouro:</label>
+        <label for="treasure">Tesouro:</label> 
+        
+        <label for="treasure"> &nbsp;&nbsp; &nbsp; Equipamento:</label>
         <br>
-        <input type="text" id="treasure" name="treasure"><br>
+         <select name="treasure" id="treasure">
+            <option value=""></option>
+            <option value="nenhum">Nenhum</option>
+            <option value="metade">Metade</option>
+            <option value="padrao">Padrão</option>
+            <option value="dobro">Dobro</option>
+        </select>
+        
+        <input type="text" id="equipamento" name="equipamento"><br> 
         <button type="submit" class="btn btn-primary" style="margin-left: 15px; margin-top: 10px">
             Submit
         </button>
@@ -136,25 +194,37 @@
     </form>
 
 
-    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js">
-    </script>
+   
     <script>
         function validateND(input) {
-            let value = parseFloat(input.value);
+            var value = parseFloat(input.value);
 
             if (value === 0.25 || value === 0.5 || Number.isInteger(value) && value >= 1) {
+preencheNDs(value);
 
-                return;
+                return value;
             } else {
                 // Se o valor for inválido, limpa o campo ou define um valor padrão
                 input.value = '';
             }
+
+           
+        
         }
-
-
+        function preencheNDs(ND){
+          
+document.getElementById('ndca').value=`${ND}`
+document.getElementById('ndfor').value=`${ND}`
+document.getElementById('ndref').value=`${ND}`
+document.getElementById('ndvon').value=`${ND}`
+document.getElementById('ndpv').value=`${ND}`
+document.getElementById('ndatq').value=`${ND}`
+document.getElementById('nddano').value=`${ND}`
+        }
     </script>
 
-
+ <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js">
+    </script>
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyD4pj-vv2AUd9BUjMpGppHrgK7aFkfQ96Q",
@@ -169,42 +239,41 @@
 
         firebase.initializeApp(firebaseConfig);
 
-        let monstrosRef = firebase.database().ref('Monstros');
+        var monstrosRef = firebase.database().ref('Monstros');
 
         document.getElementById('monstroForm')
             .addEventListener('submit', submitForm);
 
         function submitForm(e) {
             e.preventDefault();
-
             // Get values
-            let ND = getInputVal('ND');
-            let nome = getInputVal('name');
-            let tipo = getInputVal('type');
+            var ND = getInputVal('ND');
+            var nome = getInputVal('name');
+            var tipo = getInputVal('type');
 
-            let subtipo = getInputVal('subtype');
-            let tamanho = getInputVal('size');
-            let armadura = getInputVal('CA');
-            let fortitude = getInputVal('fort');
-            let reflexo = getInputVal('ref');
-            let vontade = getInputVal('von');
-            let vida = getInputVal('pv');
-            let deslocamento = getInputVal('deslocamento');
-            let valor_acerto = getInputVal('valatq');
-            let iniciativa = getInputVal('iniciativa');
-            let papel = getInputVal('papel');
-            let dano = getInputVal('dano');
-            let forca = getInputVal('for');
-            let destreza = getInputVal('des');
-            let constituicao = getInputVal('con');
-            let inteligencia = getInputVal('int');
-            let sabedoria = getInputVal('sab');
-            let carisma = getInputVal('car');
-            let tesouro = getInputVal('treasure');
+            var subtipo = getInputVal('subtype');
+            var tamanho = getInputVal('size');
+            var armadura = getInputVal('CA');
+            var fortitude = getInputVal('fort');
+            var reflexo = getInputVal('ref');
+            var vontade = getInputVal('von');
+            var vida = getInputVal('pv');
+            var deslocamento = getInputVal('deslocamento');
+            var valor_acerto = getInputVal('valatq');
+            var papel = getInputVal('papel');
+            var dano = getInputVal('dano');
+            var forca = getInputVal('for');
+            var destreza = getInputVal('des');
+            var constituicao = getInputVal('con');
+            var inteligencia = getInputVal('int');
+            var sabedoria = getInputVal('sab');
+            var carisma = getInputVal('car');
+            var tesouro = getInputVal('treasure');
+            var equipamento = getInputVal('equipamento');
 
             saveMonstro(ND, nome, tipo, subtipo, tamanho, armadura, fortitude, reflexo, vontade,
-                vida, deslocamento, iniciativa,  papel, valor_acerto, dano,
-                forca, destreza, constituicao, inteligencia, sabedoria, carisma, tesouro);
+                vida, deslocamento,  papel, valor_acerto, dano,
+                forca, destreza, constituicao, inteligencia, sabedoria, carisma, tesouro, equipamento);
             document.getElementById('monstroForm').reset();
         }
 
@@ -214,9 +283,9 @@
         }
 
         // Salva o monstro no firebase
-        function saveMonstro(ND, nome, tipo, subtipo, tamanho, armadura, fortitude, reflexo, vontade, vida, deslocamento, iniciativa, papel, valor_acerto, dano, forca, destreza, constituicao, inteligencia, sabedoria, carisma, tesouro) {
+        function saveMonstro(ND, nome, tipo, subtipo, tamanho, armadura, fortitude, reflexo, vontade, vida, deslocamento, papel, valor_acerto, dano, forca, destreza, constituicao, inteligencia, sabedoria, carisma, tesouro, equipamento) {
             alert('monstro criado')
-            let newMonstroRef = monstrosRef.push();
+            var newMonstroRef = monstrosRef.push();
             newMonstroRef.set({
                 ND: ND,
                 nome: nome,
@@ -227,7 +296,6 @@
                 fortitude: fortitude,
                 reflexo: reflexo,
                 vontade: vontade,
-                iniciativa: iniciativa,
                 papel: papel,
                 vida: vida,
                 deslocamento: deslocamento,
@@ -240,6 +308,7 @@
                 sabedoria: sabedoria,
                 carisma: carisma,
                 tesouro: tesouro,
+                equipamento:equipamento,
             });
         }
     </script>
@@ -252,54 +321,211 @@ window.getInputVal = function (id) {
 };
 
 function preenchetudo() {
-    let ND = getInputVal('ND');
-let papel = getInputVal('papel');
+    var ND = getInputVal('ND');
+var papel = getInputVal('papel');
 
 if (ND === '' ||  papel === '') {
 alert('para preencher automatico por favor preencha o ND dela e seu papel')
     
 } 
 else{
-    let armadura = getInputVal('CA');
-            let fortitude = getInputVal('fort');
-            let reflexo = getInputVal('ref');
-            let vontade = getInputVal('von');
-            let vida = getInputVal('pv');
-            let deslocamento = getInputVal('deslocamento');
-            let valor_acerto = getInputVal('valatq');
-            let iniciativa = getInputVal('iniciativa');
-            let dano = getInputVal('dano');
+    var armadura = getInputVal('CA');
+            var fortitude = getInputVal('fort');
+            var reflexo = getInputVal('ref');
+            var vontade = getInputVal('von');
+            var vida = getInputVal('pv');
+            var deslocamento = getInputVal('deslocamento');
+            var valor_acerto = getInputVal('valatq');
+            var dano = getInputVal('dano');
 
  if(armadura===''){
-  document.getElementById('CA').value = `${preencheCA(ND,papel)}`;
+
+ encheCA();
 }
-    if(fortitude===''){
-  document.getElementById('fort').value = `${preenchefor(ND,papel)}`;
+ }
+    if(fortitude===''|| vontade==='' ||reflexo===''){
+      preencheres();
 }
-  if(reflexo===''){
-  document.getElementById('ref').value = `${preenchemed(ND,papel)}`;
-} 
- if(vontade===''){
-  document.getElementById('von').value = `${preenchefra(ND,papel)}`;
-}
+
   if(vida ===''){
-  document.getElementById('pv').value = `${preenchepv(ND,papel)}`;
+    enchepv();
 } 
  if(valor_acerto===''){
-  document.getElementById('valatq').value = `${preencheatq(ND,papel)}`;
+  encheacerto();
 } 
 if(dano===''){
-  document.getElementById('dano').value = `${preenchedano(ND,papel)}`;
+  enchedano();
 }
 
 
-}
+
 return
 }
     </script>
+    <script>
+function encheCA(){
+  
+  
+    var ND = getInputVal('ND');
+    var NDca = getInputVal('ndca');
+var papel = getInputVal('papel');
+    if (ND === '' ||  papel === '') {
+alert('para preencher automatico por favor preencha o ND dela e seu papel')
+    
+} 
+else{
+ document.getElementById('CA').value = `${preencheCA(NDca,papel)}`;
+}
+}
+
+function preencheres(){
+    var NDfor = getInputVal('ndfor');
+    var NDref = getInputVal('ndref');
+    var NDvon = getInputVal('ndvon');
+    var ND = getInputVal('ND');
+var papel = getInputVal('papel');
+var refbutton = getInputVal('refpref');
+var vonbutton = getInputVal('vonpref');
+var forbutton = getInputVal('forpref');
+var maior, medio,menor;
+
+  if(ND === '' ||  papel === '' || vonbutton === '' ||  refbutton === '' ||  forbutton === '') {
+alert('para preencher automatico por favor preencha o ND dela e seu papel, ou alguma das opções para a preferencia de resistencias')
+    
+} 
+else{
+if(refbutton === 'maior'){
+maior=true;
+ document.getElementById('ref').value = `${preenchefor(NDref,papel)}`;
+}
+    
+else if(refbutton === 'medio'){
+medio=true;
+ document.getElementById('ref').value = `${preenchemed(NDref,papel)}`;
+}       
+else if(refbutton === 'menor'){
+menor=true
+ document.getElementById('ref').value = `${preenchefra(NDref,papel)}`;
+}
+
+
+
+if(vonbutton === 'maior'){
+if(maior===true){
+  alert('Ja possui um forte no monstro')
+}
+else{
+maior=true;
+ document.getElementById('von').value = `${preenchefor(NDvon,papel)}`;
+}
+}
+    
+else if(vonbutton === 'medio'){
+  if(medio===true){
+  alert('Ja possui um medio no monstro')
+}
+else{
+medio=true;
+ document.getElementById('von').value = `${preenchemed(NDvon,papel)}`;
+}
+}       
+else if(vonbutton === 'menor'){
+  if(menor===true){
+  alert('Ja possui um medio no monstro')
+}
+else{
+  document.getElementById('von').value = `${preenchefra(NDvon,papel)}`;
+menor=true
+
+
+}
+}
+
+
+
+if(forbutton === 'maior'){
+  if(maior===true){
+  alert('Ja possui um maior no monstro')
+}
+else{
+ document.getElementById('fort').value = `${preenchefor(NDfor,papel)}`;
+maior=true;
+}}
+    
+else if(forbutton === 'medio'){
+  if(medio===true){
+  alert('Ja possui um medio no monstro')
+}
+else{
+ document.getElementById('fort').value = `${preenchemed(NDfor,papel)}`;
+medio=true;
+}
+}       
+else if(forbutton === 'menor'){
+  if(menor===true){
+  alert('Ja possui um menor no monstro')
+}
+else{
+ document.getElementById('fort').value = `${preenchefra(NDfor,papel)}`;
+menor=true
+
+}}
+
+
+  
+}}
+
+
+
+
+function enchepv(){
+    var NDpv = getInputVal('ndpv');
+var papel = getInputVal('papel');
+    var ND = getInputVal('ND');
+  if (ND === '' ||  papel === '') {
+alert('para preencher automatico por favor preencha o ND dela e seu papel')
+    
+} 
+else{
+    document.getElementById('pv').value = `${preenchepv(NDpv,papel)}`;
+}}
+
+function encheacerto(){
+    var ND = getInputVal('ND');
+    var NDatq = getInputVal('ndatq');
+var papel = getInputVal('papel');
+  if (ND === '' ||  papel === '') {
+alert('para preencher automatico por favor preencha o ND dela e seu papel')
+    
+} 
+else{
+    document.getElementById('valatq').value = `${preencheatq(NDatq,papel)}`;
+}}
+function enchedano(){
+    var ND = getInputVal('ND');
+    var NDdano = getInputVal('nddano');
+var papel = getInputVal('papel');
+  if (ND === '' ||  papel === '') {
+alert('para preencher automatico por favor preencha o ND dela e seu papel')
+    
+} 
+else{
+ document.getElementById('dano').value = `${preenchedano(NDdano,papel)}`;
+}}
+    </script>
+
+
+
+
+
+
+
+
+
 <script>
 function preencheCA(nd, papel){
   var tabelaCA
+  nd = parseFloat(nd); // Converte ND para número
     if(papel=="solo"){
      tabelaCA = [
         { ND: 0.25, Defesa: 11 },

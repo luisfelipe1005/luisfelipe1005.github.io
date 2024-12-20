@@ -105,7 +105,7 @@ text-align: left;
         }
         const snapshot = await get(child(monstrosRef, key));
         if (snapshot.exists()) {
-            const { ND,nome,tipo,subtipo,tamanho,armadura, percepcao, iniciativa,fortitude,reflexo, vontade, vida, deslocamento, valor_acerto,dano,forca,destreza,constituicao,inteligencia,sabedoria,carisma,tesouro } = snapshot.val();
+            const { ND,nome,tipo,subtipo,tamanho,armadura, percepcao, iniciativa,fortitude,reflexo, vontade, vida, deslocamento, valor_acerto,dano,forca,destreza,constituicao,inteligencia,sabedoria,carisma,tesouro, equipamento } = snapshot.val();
             document.getElementById("nome").innerText = `${nome}`;
             document.getElementById("2linha").innerText = `${tipo}(${subtipo}) ${tamanho}`;
             document.getElementById("ND").innerText = `ND ${ND}`;
@@ -114,7 +114,7 @@ text-align: left;
             document.getElementById("vida").innerText = `Vida: ${vida}`;
             document.getElementById("ataque").innerText = `Corpo a corpo mordida ${valor_acerto}(${dano})`;
             document.getElementById("atributos").innerText = `For ${forca} Des ${destreza} Con ${constituicao} Int ${inteligencia} Sab ${sabedoria} Car ${carisma}  `;
-            document.getElementById("tesouro").innerText = `Tesouro: ${tesouro}`;
+            document.getElementById("retornos").innerText = `Equipamento: ${equipamento} Tesouro: ${tesouro}`;
             infoDiv.style.display = "block";
         }
     };
