@@ -276,23 +276,44 @@ document.getElementById('nddano').value=`${ND}`
         }
     </script>
 
- <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js">
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js"></script>
+
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyD4pj-vv2AUd9BUjMpGppHrgK7aFkfQ96Q",
+    authDomain: "tormenta-projeto.firebaseapp.com",
+    databaseURL: "https://tormenta-projeto-default-rtdb.firebaseio.com",
+    projectId: "tormenta-projeto",
+    storageBucket: "tormenta-projeto.firebasestorage.app",
+    messagingSenderId: "840338790531",
+    appId: "1:840338790531:web:713b137e4fc6a8640623b6",
+    measurementId: "G-H43EHD51KJ"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+
     </script>
     <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyD4pj-vv2AUd9BUjMpGppHrgK7aFkfQ96Q",
-            authDomain: "tormenta-projeto.firebaseapp.com",
-            databaseURL: "https://tormenta-projeto-default-rtdb.firebaseio.com",
-            projectId: "tormenta-projeto",
-            storageBucket: "tormenta-projeto.firebasestorage.app",
-            messagingSenderId: "840338790531",
-            appId: "1:840338790531:web:713b137e4fc6a8640623b6",
-            measurementId: "G-H43EHD51KJ"
-        };
 
-        firebase.initializeApp(firebaseConfig);
+import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
 
-        var monstrosRef = firebase.database().ref('Monstros');
+const database = getDatabase(app);
+const monstrosRef = ref(database, 'Monstros');
+
 
         document.getElementById('monstroForm')
             .addEventListener('submit', submitForm);
@@ -339,42 +360,47 @@ document.getElementById('nddano').value=`${ND}`
         }
 
         // Salva o monstro no firebase
-        function saveMonstro(ND, papel,nome, tipo, subtipo, tamanho, deslocamento, armadura, fortitude, reflexo, vontade,
-                vida, qtd_ataque, valor_acerto,nomearma,dado_base,valor_acerto, dano, critico,
-                forca, destreza, constituicao, inteligencia, sabedoria, carisma, tesouro, equipamento) {
-            alert('monstro criado')
-            var newMonstroRef = monstrosRef.push();
-            newMonstroRef.set({
-                ND: ND,
-                papel: papel,
-                nome: nome,
-                tipo: tipo,
-                subtipo: subtipo,
-                tamanho: tamanho,
-                deslocamento: deslocamento,
-                armadura: armadura,
-                fortitude: fortitude,
-                reflexo: reflexo,
-                vontade: vontade,
-                vida: vida,
-                papel: papel,
-                qtd_ataque: qtd_ataque,
-                valor_acerto: valor_acerto,
-                nomearma: nomearma,
-                dado_base: dado_base,
-                valor_acerto: valor_acerto,
-                dano: dano,
-                critico: critico,
-                forca: forca,
-                destreza: destreza,
-                constituicao: constituicao,
-                inteligencia: inteligencia,
-                sabedoria: sabedoria,
-                carisma: carisma,
-                tesouro: tesouro,
-                equipamento:equipamento,
-            });
-        }
+function saveMonstro(ND, papel, nome, tipo, subtipo, tamanho, deslocamento, armadura, fortitude, reflexo, vontade,
+    vida, qtd_ataque, valor_acerto, nomearma, dado_base, dano, critico,
+    forca, destreza, constituicao, inteligencia, sabedoria, carisma, tesouro, equipamento) {
+    
+    const newMonstroRef = push(monstrosRef); // Criar nova entrada
+    set(newMonstroRef, {
+        ND,
+        papel,
+        nome,
+        tipo,
+        subtipo,
+        tamanho,
+        deslocamento,
+        armadura,
+        fortitude,
+        reflexo,
+        vontade,
+        vida,
+        qtd_ataque,
+        valor_acerto,
+        nomearma,
+        dado_base,
+        dano,
+        critico,
+        forca,
+        destreza,
+        constituicao,
+        inteligencia,
+        sabedoria,
+        carisma,
+        tesouro,
+        equipamento
+    })
+    .then(() => {
+        alert('Monstro criado com sucesso!');
+    })
+    .catch((error) => {
+        console.error('Erro ao salvar monstro:', error);
+        alert('Erro ao criar o monstro. Verifique o console.');
+    });
+}
     </script>
 
  
