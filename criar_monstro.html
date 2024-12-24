@@ -28,9 +28,11 @@
     <h1>Criador manual de monstros.</h1>
     <p>Adicione as caracteristicas do seu monstro aqui:.</p>
     <form id="monstroForm">
-        <label for="desafio">Nivel de Desafio:</label><br>
+        <label for="desafio">Nivel de Desafio:</label>
+<p>Para monstros 1/4 e 1/2 use 0.25 e 0.5 perspectivamente, para S e S+ use 21 e 22 
+<br>
 
-        <input type="number" id="ND" name="nd" min="0" max="22" oninput="validateND(this)" ><br>
+        <input type="number" id="ND" name="nd"  max="22" oninput="validateND(this)" ><br>
 
         <label for="size">Papel do monstro em combate:</label>
         <br>
@@ -82,9 +84,8 @@
             <option value="colossal">Colossal</option>
         </select>
         <br>
-        <label for="deslocamento">deslocamento:</label><br>
+        <label for="deslocamento">deslocamento(em quadrados):</label><br>
         <input type="number" id="deslocamento" name="deslocamento"><br>
-
 
         <label for="defesa">Defesa:</label><br>
         <input type="number" id="CA" name="defesa">
@@ -222,7 +223,7 @@ critico.value="20/x2"
 break;
 case "mordida":
 nomearma.value="mordida";
-dadobase.value="1d8"
+dadobase.value="1d6"
 critico.value="20/x2"
 break;
 case "cauda":
@@ -237,8 +238,8 @@ critico.value="19/x2"
 break;
 case "pistola":
 nomearma.value="pistola";
-dadobase.value="1d8"
-critico.value="20/x2"
+dadobase.value="2d6"
+critico.value="19/x3"
 break;
 
 default:
@@ -317,9 +318,8 @@ document.getElementById('nddano').value=`${ND}`
             var valor_acerto = getInputVal('bonusacerto');
             var nomearma = getInputVal('nomearma');
             var dado_base= getInputVal('danodado');
-            var valor_acerto= getInputVal('bonusatq');
             var dano = getInputVal('danobonus');
-            var critico= getInputVal('critico');
+            var critico= getInputVal('critico_atq');
             var forca = getInputVal('for');
             var destreza = getInputVal('des');
             var constituicao = getInputVal('con');

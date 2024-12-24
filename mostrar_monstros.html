@@ -104,14 +104,16 @@ text-align: left;
         }
         const snapshot = await get(child(monstrosRef, key));
         if (snapshot.exists()) {
-            const { ND,nome,tipo,subtipo,tamanho,armadura, percepcao, iniciativa,fortitude,reflexo, vontade, vida, deslocamento, valor_acerto,dano,forca,destreza,constituicao,inteligencia,sabedoria,carisma,tesouro, equipamento } = snapshot.val();
+            const { ND, papel,nome, tipo, subtipo, tamanho, deslocamento, armadura, fortitude, reflexo, vontade,
+                vida, qtd_ataque, valor_acerto,nomearma,dado_base, dano, critico,
+                forca, destreza, constituicao, inteligencia, sabedoria, carisma, tesouro, equipamento } = snapshot.val();
             document.getElementById("nome").innerText = `${nome}`;
             document.getElementById("2linha").innerText = `${tipo}(${subtipo}) ${tamanho}`;
             document.getElementById("ND").innerText = `ND ${ND}`;
             document.getElementById("3linha").innerText = `Iniciativa ${Math.floor(parseInt(destreza)+(parseInt(ND)/2))} Percepção ${Math.floor(parseInt(sabedoria)+(parseInt(ND)/2))}`;
             document.getElementById("4linha").innerText = `Defesa ${armadura} Fort ${fortitude} Ref ${reflexo} Von ${vontade} `;
             document.getElementById("vida").innerText = `Vida: ${vida}`;
-            document.getElementById("ataque").innerText = `Corpo a corpo mordida ${valor_acerto}(${dano})`;
+            document.getElementById("ataque").innerText = `Corpo a corpo  ${nomearma} X${qtd_ataque} +${valor_acerto}(${dado_base}+${dano}, ${critico})`;
             document.getElementById("atributos").innerText = `For ${forca} Des ${destreza} Con ${constituicao} Int ${inteligencia} Sab ${sabedoria} Car ${carisma}  `;
             document.getElementById("retornos").innerText = `Equipamento: ${equipamento} Tesouro: ${tesouro}`;
             infoDiv.style.display = "block";
