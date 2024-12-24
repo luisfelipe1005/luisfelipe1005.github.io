@@ -88,7 +88,7 @@
 
         <label for="defesa">Defesa:</label><br>
         <input type="number" id="CA" name="defesa">
-<input type="number" id="ndca" name="ndca" value=ND.value>
+<input type="number" id="ndca" name="ndca" placeholder="ND alvo">
         <button class="button" type="button" style=" margin-top: 10px" onclick="encheCA()">
           Preenche
       </button>
@@ -103,7 +103,7 @@
           <option value="menor">Menor</option>
       </select>
 
-<input type="number" id="ndfor" name="ndfor">
+<input type="number" id="ndfor" placeholder="ND alvo" name="ndfor">
 
         <br>
         <label for="ref">reflexo:</label><br>
@@ -114,7 +114,7 @@
           <option value="medio">Medio</option>
           <option value="menor">Menor</option>
       </select>
-<input type="number" id="ndref" name="ndref">
+<input type="number" id="ndref" placeholder="ND alvo" name="ndref">
         <button class="button" type="button" style=" margin-top: 10px" onclick="preencheres()">
           Preenche resistencias
       </button>
@@ -127,33 +127,48 @@
           <option value="medio">Medio</option>
           <option value="menor">Menor</option>
       </select>
-<input type="number" id="ndvon" name="ndvon">
+<input type="number" id="ndvon" placeholder="ND alvo" name="ndvon">
 
       <br>
 
         <label for="pv">pontos de vida:</label><br>
         <input type="number" id="pv" name="pontos de vida">
 
-<input type="number" id="ndpv" name="ndpv">
+<input type="number" id="ndpv"  placeholder="ND alvo" name="ndpv">
         <button class="button" type="button" style=" margin-top: 10px" onclick="enchepv()">
           Preenche
       </button>
       <br>
 
-        <label for="pv">valor de acerto:</label><br>
-        <input type="number" id="valatq" name="valor ataque">
-        
-<input type="number" id="ndatq" name="ndatq">
-        <button class="button" type="button" style=" margin-top: 10px" onclick="encheacerto()">
-          Preenche
-      </button><br>
-        <label for="dano">dano medio:</label><br>
-        <input type="number" id="dano" name="dano">
+        <label for="pv">Ataque:</label><br>
+        <input type="number" id="qtdataques" placeholder="quantidade de ataques" name="qtdataque">
+        <input type="number" id="bonusacerto" placeholder="bonus de acerto" name="bonus ataque">  
+<input type="number" id="ndatq" placeholder="ND alvo de ataque" name="ndatq">
+ 
+  <select name="armas" id="templatearmas" onchange="handleInput(event)">
+          <option value="">Armas base</option>
+          <option value="chifre">chifres(1d8)</option>
+          <option value="mordida">mordida(1d6)</option>
+          <option value="cauda">cauda(1d6)</option>
+          <option value="espada">espada longa(1d8,19)</option>
+          <option value="pistola">pistola(2d6,19/x3)</option>
+      </select>
 
-<input type="number" id="nddano" name="nddano">
-        <button class="button" type="button" style=" margin-top: 10px" onclick="enchedano()">
-          Preenche
-      </button>
+        <input type="text" id="nomearma" placeholder="nome do ataque/arma"  name="valor_ataque">
+        <input type="text" placeholder="dado base do ataque" id="danodado" name="dado">
+        <input type="number" placeholder="dano bonus" id="danobonus" name="dano">
+        
+
+        <input type="text" placeholder="critico do ataque" id="critico_atq" name="dano">
+
+
+
+
+<input type="number" id="nddano" placeholder="ND alvo para dano" name="ndano">
+        <button class="button" type="button" style=" margin-top: 10px" onclick="encheataque()">
+          Preenche dano
+      </button><br>
+
       <br>
 
         <label for="for">FOR</label>
@@ -193,7 +208,45 @@
 
     </form>
 
+    <script>
+        function handleInput(event) {
+            const selectedValue = event.target.value;
+nomearma=document.getElementById('nomearma')
+dadobase=document.getElementById('danodado')
+critico=document.getElementById('critico_atq')
+switch(selectedValue ){
+case "chifre":
+nomearma.value="chifre";
+dadobase.value="1d8"
+critico.value="20/x2"
+break;
+case "mordida":
+nomearma.value="mordida";
+dadobase.value="1d8"
+critico.value="20/x2"
+break;
+case "cauda":
+nomearma.value="cauda";
+dadobase.value="1d6"
+critico.value="20/x2"
+break;
+case "espada":
+nomearma.value="espada longa";
+dadobase.value="1d8"
+critico.value="19/x2"
+break;
+case "pistola":
+nomearma.value="pistola";
+dadobase.value="1d8"
+critico.value="20/x2"
+break;
 
+default:
+alert("testando")
+break;
+}
+        }
+    </script>
    
     <script>
         function validateND(input) {
@@ -248,20 +301,23 @@ document.getElementById('nddano').value=`${ND}`
             e.preventDefault();
             // Get values
             var ND = getInputVal('ND');
+            var papel = getInputVal('papel');
             var nome = getInputVal('name');
             var tipo = getInputVal('type');
-
             var subtipo = getInputVal('subtype');
             var tamanho = getInputVal('size');
+            var deslocamento = getInputVal('deslocamento');
             var armadura = getInputVal('CA');
             var fortitude = getInputVal('fort');
             var reflexo = getInputVal('ref');
             var vontade = getInputVal('von');
             var vida = getInputVal('pv');
-            var deslocamento = getInputVal('deslocamento');
-            var valor_acerto = getInputVal('valatq');
-            var papel = getInputVal('papel');
-            var dano = getInputVal('dano');
+            var qtd_ataque= getInputVal('qtdataques');
+            var valor_acerto = getInputVal('bonusacerto');
+            var nomearma = getInputVal('nomearma');
+            var dado_base= getInputVal('danodado');
+            var dano = getInputVal('danobonus');
+            var critico= getInputVal('critico');
             var forca = getInputVal('for');
             var destreza = getInputVal('des');
             var constituicao = getInputVal('con');
@@ -271,8 +327,8 @@ document.getElementById('nddano').value=`${ND}`
             var tesouro = getInputVal('treasure');
             var equipamento = getInputVal('equipamento');
 
-            saveMonstro(ND, nome, tipo, subtipo, tamanho, armadura, fortitude, reflexo, vontade,
-                vida, deslocamento,  papel, valor_acerto, dano,
+            saveMonstro(ND, papel,nome, tipo, subtipo, tamanho, deslocamento, armadura, fortitude, reflexo, vontade,
+                vida, qtd_ataque, valor_acerto,nomearma,dado_base, dano, critico,
                 forca, destreza, constituicao, inteligencia, sabedoria, carisma, tesouro, equipamento);
             document.getElementById('monstroForm').reset();
         }
@@ -283,24 +339,32 @@ document.getElementById('nddano').value=`${ND}`
         }
 
         // Salva o monstro no firebase
-        function saveMonstro(ND, nome, tipo, subtipo, tamanho, armadura, fortitude, reflexo, vontade, vida, deslocamento, papel, valor_acerto, dano, forca, destreza, constituicao, inteligencia, sabedoria, carisma, tesouro, equipamento) {
+        function saveMonstro(ND, papel,nome, tipo, subtipo, tamanho, deslocamento, armadura, fortitude, reflexo, vontade,
+                vida, qtd_ataque, valor_acerto,nomearma,dado_base,valor_acerto, dano, critico,
+                forca, destreza, constituicao, inteligencia, sabedoria, carisma, tesouro, equipamento) {
             alert('monstro criado')
             var newMonstroRef = monstrosRef.push();
             newMonstroRef.set({
                 ND: ND,
+                papel: papel,
                 nome: nome,
                 tipo: tipo,
                 subtipo: subtipo,
                 tamanho: tamanho,
+                deslocamento: deslocamento,
                 armadura: armadura,
                 fortitude: fortitude,
                 reflexo: reflexo,
                 vontade: vontade,
-                papel: papel,
                 vida: vida,
-                deslocamento: deslocamento,
+                papel: papel,
+                qtd_ataque: qtd_ataque,
+                valor_acerto: valor_acerto,
+                nomearma: nomearma,
+                dado_base: dado_base,
                 valor_acerto: valor_acerto,
                 dano: dano,
+                critico: critico,
                 forca: forca,
                 destreza: destreza,
                 constituicao: constituicao,
@@ -335,8 +399,8 @@ else{
             var vontade = getInputVal('von');
             var vida = getInputVal('pv');
             var deslocamento = getInputVal('deslocamento');
-            var valor_acerto = getInputVal('valatq');
-            var dano = getInputVal('dano');
+            var valor_acerto = getInputVal('bonusacerto');
+            var dano = getInputVal('danobonus');
 
  if(armadura===''){
 
@@ -350,11 +414,9 @@ else{
   if(vida ===''){
     enchepv();
 } 
- if(valor_acerto===''){
-  encheacerto();
-} 
-if(dano===''){
-  enchedano();
+ if(valor_acerto==='' ||dano===''){
+  encheataque();
+
 }
 
 
@@ -490,28 +552,67 @@ else{
     document.getElementById('pv').value = `${preenchepv(NDpv,papel)}`;
 }}
 
-function encheacerto(){
+function encheataque(){
     var ND = getInputVal('ND');
     var NDatq = getInputVal('ndatq');
+    
+
+
 var papel = getInputVal('papel');
   if (ND === '' ||  papel === '') {
 alert('para preencher automatico por favor preencha o ND dela e seu papel')
     
 } 
 else{
-    document.getElementById('valatq').value = `${preencheatq(NDatq,papel)}`;
-}}
-function enchedano(){
-    var ND = getInputVal('ND');
+    document.getElementById('bonusacerto').value = `${preencheatq(NDatq,papel)}`;
+}
+
+
     var NDdano = getInputVal('nddano');
-var papel = getInputVal('papel');
+        var dado=getInputVal('danodado')
+    
+  
+var qtdataques=document.getElementById('qtdataques')
+
+
   if (ND === '' ||  papel === '') {
 alert('para preencher automatico por favor preencha o ND dela e seu papel')
     
 } 
 else{
- document.getElementById('dano').value = `${preenchedano(NDdano,papel)}`;
-}}
+  if(qtdataques.value===''){
+  qtdataques.value=1}
+
+
+    var quantiadado='', valor=''
+    const D = dado.indexOf('d');
+    if(D===0){
+      valor=1;
+    }
+    else{
+    for(x=0;x<D;x++){
+    quantiadado+=dado[x]
+    }
+    }
+    console.log('a quantia de dados é:', quantiadado);
+    for(y=D+1;y<dado.length;y++){
+    valor+=dado[y]
+    
+    }
+    console.log('o valor de dados é:', valor);
+var mediadanodado=(1+parseInt(valor))/2*parseInt(quantiadado)
+var danofinal = (preenchedano(NDdano,papel))
+danofinal = (danofinal-mediadanodado)
+console.log(qtdataques.value)
+danofinal= Math.floor(danofinal/(parseInt(qtdataques.value)))
+
+console.log(danofinal)
+ document.getElementById('danobonus').value = danofinal;
+}
+
+
+}
+
     </script>
 
 

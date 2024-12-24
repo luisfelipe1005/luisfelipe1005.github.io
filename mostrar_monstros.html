@@ -71,12 +71,11 @@ text-align: left;
         <p id="3linha"></p>
         <p id="4linha"></p>
         <p id="atributos"></p>
-        <p id="tesouro"></p>
+        <p id="retornos"></p>
     </div>
 
 
 
-    ...
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
     import { getDatabase, ref, child, get } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
@@ -109,7 +108,7 @@ text-align: left;
             document.getElementById("nome").innerText = `${nome}`;
             document.getElementById("2linha").innerText = `${tipo}(${subtipo}) ${tamanho}`;
             document.getElementById("ND").innerText = `ND ${ND}`;
-            document.getElementById("3linha").innerText = `Iniciativa ${iniciativa} Percepção ${percepcao}`;
+            document.getElementById("3linha").innerText = `Iniciativa ${Math.floor(parseInt(destreza)+(parseInt(ND)/2))} Percepção ${Math.floor(parseInt(sabedoria)+(parseInt(ND)/2))}`;
             document.getElementById("4linha").innerText = `Defesa ${armadura} Fort ${fortitude} Ref ${reflexo} Von ${vontade} `;
             document.getElementById("vida").innerText = `Vida: ${vida}`;
             document.getElementById("ataque").innerText = `Corpo a corpo mordida ${valor_acerto}(${dano})`;
