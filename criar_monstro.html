@@ -32,7 +32,7 @@
 <p>Para monstros 1/4 e 1/2 use 0.25 e 0.5 perspectivamente, para S e S+ use 21 e 22 
 <br>
 
-        <input type="number" id="ND" name="nd"  max="22" oninput="validateND(this)" ><br>
+        <input type="text" id="ND" name="nd"   oninput="validateND(this)" ><br>
 
         <label for="size">Papel do monstro em combate:</label>
         <br>
@@ -253,7 +253,8 @@ break;
         function validateND(input) {
             var value = parseFloat(input.value);
 
-            if (value === 0.25 || value === 0.5 || Number.isInteger(value) && value >= 1) {
+
+            if (value === 0.25 || value === 0.5 ||value === 0||value === 0.2  || (Number.isInteger(value) && value >= 1 && value <=22)) {
 preencheNDs(value);
 
                 return value;
@@ -299,7 +300,6 @@ document.getElementById('nddano').value=`${ND}`
             .addEventListener('submit', submitForm);
 
         function submitForm(e) {
-          alert('entrou no submit')
             e.preventDefault();
             // Get values
             var ND = getInputVal('ND');
@@ -328,12 +328,10 @@ document.getElementById('nddano').value=`${ND}`
             var carisma = getInputVal('car');
             var tesouro = getInputVal('treasure');
             var equipamento = getInputVal('equipamento');
-          alert('terminou o submit')
 
             saveMonstro(ND, papel,nome, tipo, subtipo, tamanho, deslocamento, armadura, fortitude, reflexo, vontade,
                 vida, qtd_ataque, valor_acerto,nomearma,dado_base, dano, critico,
                 forca, destreza, constituicao, inteligencia, sabedoria, carisma, tesouro, equipamento);
-alert('resetando pagina')
             document.getElementById('monstroForm').reset();
         }
 
