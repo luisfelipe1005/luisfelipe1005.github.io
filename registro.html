@@ -52,7 +52,7 @@
         }
     </style>
     
-    <script type="module" src="Monstro.js" defer></script>
+    <script type="module" src="/src/Monstro.js" defer></script>
 </head>
 <body>
     <form class="login-form" action="/login" method="POST">
@@ -63,7 +63,7 @@
         <label for="password">Senha</label>
         <input type="password" id="senha" name="password" placeholder="Digite sua senha" required>
         
-        <button type="submit" id="submit">Entrar</button>
+        <button type="submit" onclick="location.href='login.html'" id="submit">Entrar</button>
     </form>
 </body>
 </html>

@@ -58,6 +58,7 @@ submit.addEventListener("click", async function (event) {
         const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
         console.log("Conta criada com sucesso:", userCredential.user);
         alert("Conta criada com sucesso!");
+        
     } catch (error) {
         console.error("Erro ao criar conta:", error.message);
         alert(`Erro: ${error.message}`);
