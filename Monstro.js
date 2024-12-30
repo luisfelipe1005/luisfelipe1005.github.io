@@ -53,16 +53,12 @@ event.preventDefault()
 
 const email = document.getElementById('email').value;
 const senha=document.getElementById('senha').value;
-createUserWithEmailAndPassword(auth, email, senha)
-.then((userCredential) => {
-// Signed up
-const user = userCredential.user;
-alert("Criando conta.")
-})
-.catch((erroг) => {
-const errorCode = error.code;
-const errorMessage = error.message;
-alert(errorMessage)
+try {
+  const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
+  console.log("Conta criada com sucesso:", userCredential.user);
+  alert("Conta criada com sucesso!");
+} catch (error) {
+  console.error("Erro ao criar conta:", error.message);
+  alert(`Erro: ${error.message}`);
+}
 });
-
-  })
