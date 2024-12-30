@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +14,6 @@
             margin: 0;
             background-color: #f0f0f0;
         }
-
         .login-form {
             background-color: #fff;
             padding: 20px;
@@ -23,18 +21,15 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 300px;
         }
-
         .login-form h2 {
             margin-bottom: 20px;
             text-align: center;
         }
-
         .login-form label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
         }
-
         .login-form input {
             width: 100%;
             padding: 10px;
@@ -42,7 +37,6 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
-
         .login-form button {
             width: 100%;
             padding: 10px;
@@ -53,28 +47,23 @@
             font-size: 16px;
             cursor: pointer;
         }
-
         .login-form button:hover {
             background-color: #0056b3;
         }
     </style>
-
+    
     <script type="module" src="Monstro.js" defer></script>
 </head>
-
 <body>
     <form class="login-form" action="/login" method="POST">
         <h2>Login</h2>
         <label for="username">Usuário</label>
-        <input type="text" id="loginemail" name="username" placeholder="Digite seu usuário" required>
-
+        <input type="text" id="email" name="username" placeholder="Digite seu usuário" required>
+        
         <label for="password">Senha</label>
-        <input type="password" id="loginsenha" name="password" placeholder="Digite sua senha" required>
-
-        <a location.href="registro.html">Não registrado? Faça seu registro</a>
-
+        <input type="password" id="senha" name="password" placeholder="Digite sua senha" required>
+        
         <button type="submit" id="submit">Entrar</button>
     </form>
 </body>
-
 </html>
