@@ -21,7 +21,7 @@
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
-
+  const auth = getAuth(app);
 
   //botão de submit
 
