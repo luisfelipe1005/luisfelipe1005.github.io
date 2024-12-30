@@ -1,7 +1,7 @@
 // Importar as funções necessárias do Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signinUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
 // Configuração do Firebase
 const firebaseConfig = {
@@ -30,9 +30,9 @@ const validatePassword = (password) => {
     };
 };
 
-// Botão de submit
-const submit = document.getElementById("submit");
-submit.addEventListener("click", async function (event) {
+// Botão de submit para o registro
+const submitreg = document.getElementById("submitreg");
+submitreg.addEventListener("click", async function (event) {
     event.preventDefault();
 
     // Inputs para login
@@ -56,6 +56,34 @@ submit.addEventListener("click", async function (event) {
     // Criar conta no Firebase
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
+        console.log("Conta criada com sucesso:", userCredential.user);
+        alert("Conta criada com sucesso!");
+        window.location.href = "login.html";
+
+        
+    } catch (error) {
+        console.error("Erro ao criar conta:", error.message);
+        alert(`Erro: ${error.message}`);
+    }
+});
+
+
+
+
+// Botão de login
+
+const submitlog = document.getElementById("submitlog");
+submitlog.addEventListener("click", async function (event) {
+    event.preventDefault();
+
+    // Inputs para login
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("senha").value;
+
+   
+    // Criar conta no Firebase
+    try {
+        const userCredential = await signinUserWithEmailAndPassword(auth, email, senha);
         console.log("Conta criada com sucesso:", userCredential.user);
         alert("Conta criada com sucesso!");
         window.location.href = "login.html";
