@@ -33,7 +33,7 @@ event.preventDefault()
 const email = document.getElementById('email').value;
 const senha=document.getElementById('senha').value;
 
-createUserWithEmailAndPassword(auth, email, password)
+createUserWithEmailAndPassword(auth, email, senha)
 .then((userCredential) => {
 // Signed up
 const user = userCredential.user;
