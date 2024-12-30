@@ -1,7 +1,7 @@
 // Importar as funções necessárias do Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
-import { getAuth, createUserWithEmailAndPassword, signinUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
 // Configuração do Firebase
 const firebaseConfig = {
@@ -83,7 +83,7 @@ submitlog.addEventListener("click", async function (event) {
    
     // Criar conta no Firebase
     try {
-        const userCredential = await signinUserWithEmailAndPassword(auth, email, senha);
+        const userCredential = await signInWithEmailAndPassword(auth, email, senha);
         console.log("Conta criada com sucesso:", userCredential.user);
         alert("Conta criada com sucesso!");
         window.location.href = "login.html";
