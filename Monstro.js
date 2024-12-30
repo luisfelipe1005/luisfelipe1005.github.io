@@ -27,12 +27,14 @@
 
   const submit = document.getElementById('submit');
   submit.addEventListener("click",function(event){
+    alert(1)
 event.preventDefault()
+alert(2)
 //inputs para login
 
 const email = document.getElementById('email').value;
 const senha=document.getElementById('senha').value;
-
+alert(3)
 createUserWithEmailAndPassword(auth, email, senha)
 .then((userCredential) => {
 // Signed up
