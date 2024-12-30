@@ -85,12 +85,12 @@ submitlog.addEventListener("click", async function (event) {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, senha);
         console.log("Conta criada com sucesso:", userCredential.user);
-        alert("Conta criada com sucesso!");
-        window.location.href = "login.html";
+        alert("Logado com sucesso!");
+        window.location.href = "index.html";
 
         
     } catch (error) {
-        console.error("Erro ao criar conta:", error.message);
+        console.error("Erro ao logar:", error.message);
         alert(`Erro: ${error.message}`);
     }
 });
