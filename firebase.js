@@ -77,8 +77,8 @@ submitlog.addEventListener("click", async function (event) {
     event.preventDefault();
 
     // Inputs para login
-    const email = document.getElementById("email").value;
-    const senha = document.getElementById("senha").value;
+    const email = document.getElementById("loginemail").value;
+    const senha = document.getElementById("loginsenha").value;
 
    
     // Criar conta no Firebase
