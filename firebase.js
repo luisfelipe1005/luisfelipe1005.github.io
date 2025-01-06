@@ -73,6 +73,7 @@ submitreg.addEventListener("click", async function (event) {
 // Botão de login
 
 const submitlog = document.getElementById("submitlog");
+alert(0)
 submitlog.addEventListener("click", async function (event) {
     event.preventDefault();
 alert(1)
