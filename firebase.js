@@ -41,6 +41,7 @@ submitreg.addEventListener("click", async function (event) {
     event.preventDefault();
 
     // Inputs para login
+    const nome = document.getElementById("nome").value;
     const email = document.getElementById("email").value;
     const senha = document.getElementById("senha").value;
 
@@ -60,7 +61,7 @@ submitreg.addEventListener("click", async function (event) {
 
     // Criar conta no Firebase
     try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
+        const userCredential = await createUserWithEmailAndPassword(auth, email, senha,nome);
         console.log("Conta criada com sucesso:", userCredential.user);
         alert("Conta criada com sucesso!");
         window.location.href = "login.html";
@@ -81,19 +82,17 @@ const submitlog = document.getElementById("submitlog");
 
 submitlog.addEventListener("click", async function (event) {
     event.preventDefault();
-alert(1)
     // Inputs para login
     const email = document.getElementById("loginemail").value;
     const senha = document.getElementById("loginsenha").value;
-    alert(2)
+  
 
    
     // Criar conta no Firebase
     try {
-        alert(3)
         const userCredential = await signInWithEmailAndPassword(auth, email, senha);
         console.log("Conta criada com sucesso:", userCredential.user);
-        alert("Logado com sucesso!");
+        alert("Logado com sucesso como: "+ nome);
         window.location.href = "index.html";
 
         
