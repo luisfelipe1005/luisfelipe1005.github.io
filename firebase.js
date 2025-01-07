@@ -23,7 +23,8 @@ const auth = getAuth(app);
 
 
 
-// Botão de login
+// Botão de login 
+//
 
 const submitlog = document.getElementById("submitlog");
 
