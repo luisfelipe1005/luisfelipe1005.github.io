@@ -1,4 +1,4 @@
-aler('arquivo carregado de forma correta')
+console.log('arquivo carregado de forma correta')
 // Importar as funções necessárias do Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
@@ -20,6 +20,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
+
+const pagina = document.body.dataset.page;
+
+if (pagina === "registro") {
 
 // Função para validar a senha (exemplo customizado)
 const validatePassword = (password) => {
@@ -67,12 +71,12 @@ submitreg.addEventListener("click", async function (event) {
         alert(`Erro: ${error.message}`);
     }
 });
-
+}
 
 
 
 // Botão de login
-
+if (pagina === "login") {
 const submitlog = document.getElementById("submitlog");
 
 submitlog.addEventListener("click", async function (event) {
@@ -98,3 +102,4 @@ alert(1)
         alert(`Erro: ${error.message}`);
     }
 });
+}
