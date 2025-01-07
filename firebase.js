@@ -71,29 +71,29 @@ submitreg.addEventListener("click", async function (event) {
 
 
 // Botão de login
+document.addEventListener("DOMContentLoaded", function () {
+    const submitlog = document.getElementById("submitlog");
 
-const submitlog = document.getElementById("submitlog");
-
-submitlog.addEventListener("click", async function (event) {
-    event.preventDefault();
-alert(1)
-    // Inputs para login
-    const email = document.getElementById("loginemail").value;
-    const senha = document.getElementById("loginsenha").value;
-    alert(2)
-
-   
-    // Criar conta no Firebase
-    try {
-        alert(3)
-        const userCredential = await signInWithEmailAndPassword(auth, email, senha);
-        console.log("Conta criada com sucesso:", userCredential.user);
-        alert("Logado com sucesso!");
-        window.location.href = "index.html";
-
-        
-    } catch (error) {
-        console.error("Erro ao logar:", error.message);
-        alert(`Erro: ${error.message}`);
+    if (!submitlog) {
+        console.error("Botão de login não encontrado no DOM!");
+        return;
     }
+
+    submitlog.addEventListener("click", async function (event) {
+        event.preventDefault();
+        alert("Botão de login clicado!");
+        
+        const email = document.getElementById("loginemail").value;
+        const senha = document.getElementById("loginsenha").value;
+
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, senha);
+            console.log("Logado com sucesso:", userCredential.user);
+            alert("Logado com sucesso!");
+            window.location.href = "index.html";
+        } catch (error) {
+            console.error("Erro ao logar:", error.message);
+            alert(`Erro: ${error.message}`);
+        }
+    });
 });
