@@ -30,7 +30,7 @@ const validatePassword = (password) => {
     };
 };
 
-// Botão de submit para o registro
+/*// Botão de submit para o registro
 const submitreg = document.getElementById("submitreg");
 submitreg.addEventListener("click", async function (event) {
     event.preventDefault();
@@ -66,14 +66,14 @@ submitreg.addEventListener("click", async function (event) {
         alert(`Erro: ${error.message}`);
     }
 });
-
+*/
 
 
 
 // Botão de login
 
 const submitlog = document.getElementById("submitlog");
-alert(0)
+
 submitlog.addEventListener("click", async function (event) {
     event.preventDefault();
 alert(1)
