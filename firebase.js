@@ -1,3 +1,4 @@
+console.log('arquivo carregado de forma correta')
 // Importar as funções necessárias do Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
