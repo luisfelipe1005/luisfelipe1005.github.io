@@ -63,6 +63,13 @@ submitreg.addEventListener("click", async function (event) {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, senha,nome);
         console.log("Conta criada com sucesso:", userCredential.user);
+
+        await setDoc(doc(db, "users", user.uid), {
+            nome: nome,
+            email: email,
+            criadoEm: new Date().toISOString()
+        });
+
         alert("Conta criada com sucesso!");
         window.location.href = "login.html";
 
@@ -91,8 +98,18 @@ submitlog.addEventListener("click", async function (event) {
     // Criar conta no Firebase
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, senha);
-        console.log("Conta criada com sucesso:", userCredential.user);
-        alert("Logado com sucesso como: "+ nome);
+        const user = userCredential.user;
+
+        // Busca informações do usuário no Firestore
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        if (userDoc.exists()) {
+            const userData = userDoc.data();
+            console.log("Nome do usuário recuperado:", userData.nome);
+            alert(`Bem-vindo de volta, ${userData.nome}!`);
+        } else {
+            console.log("Usuário não encontrado no banco de dados.");
+            alert("Erro: Informações adicionais não encontradas.");
+        }
         window.location.href = "index.html";
 
         
