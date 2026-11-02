@@ -8,7 +8,7 @@ import { getFirestore, setDoc, doc } from "https://www.gstatic.com/firebasejs/11
 
 // Configuração do Firebase
 const firebaseConfig = {
-    apiKey: "AIzaSyD4pj-vv2AUd9BUjMpGppHrgK7aFkfQ96Q",
+    apiKey: "______",
     authDomain: "tormenta-projeto.firebaseapp.com",
     databaseURL: "https://tormenta-projeto-default-rtdb.firebaseio.com",
     projectId: "tormenta-projeto",
